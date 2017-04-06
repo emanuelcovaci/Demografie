@@ -87,3 +87,23 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# JetBrains IDEs
+.idea/
+
+# Sebi's mac stuff
+.DS_store
+
+# Sql lite
+*.sqlite3
+
+# Folder where documents are stored
+/media/
+
+.project
+.pydevproject
+
+# Search engine indexes
+whoosh_index/
+
+migrations/
