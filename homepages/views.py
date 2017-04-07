@@ -13,6 +13,12 @@ def text(request):
 def demografia(request):
     return render(request,'homepages/demografia.html')
 
+def tranzitia(request):
+    return render(request,'homepages/tranzitia.html')
+
+def istoric(request):
+    return render(request,'homepages/istoric.html')
+
 
 def dash(request):
     return render(request,'common/base.html')
