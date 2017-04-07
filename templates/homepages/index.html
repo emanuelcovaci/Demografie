@@ -4,7 +4,7 @@
   {% load staticfiles sass_tags %}
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Starter Template - Materialize</title>
+  <title>Pythonic</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -24,19 +24,34 @@
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
-  <div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-      <br><br>
-      <h1 class="header center amber-text">Demografia Romaniei</h1>
-      <div class="row center">
-        <h5 class="header col s12 light">O analiza detaliata asupra demografiei Romaniei</h5>
-      </div>
-      <div class="row center">
-        <a href="#" id="download-button" class="btn-large waves-effect waves-light ">Sa incepem</a>
-      </div>
-      <br><br>
 
+  <div class="section no-pad-top" id="index-banner">
+    <div class="carousel carousel-slider center" style="width: 100%; height: 399px;" data-indicators="true">
+        <div class="carousel-fixed-item center">
+          <h1 class="header center white-text">Demografia Romaniei</h1>
+          <div class="row center">
+            <h5 class="header col s12 white-text">O analiza detaliata asupra demografiei Romaniei</h5>
+          </div>
+          <div class="row center">
+            <a href="#" id="download-button" class="btn-large waves-effect waves-light ">Sa incepem</a>
+          </div>
+        </div>
+        <div class="carousel-item carousel-img-wrapper" href="#one!">
+
+         <img src="{% static 'img/timisoara3.jpg'%}">
+        </div>
+        <div class="carousel-item carousel-img-wrapper" href="#two!">
+          <img src="{% static 'img/protest.jpg'%}">
+        </div>
+        <div class="carousel-item green white-text" href="#three!">
+          <img src="{% static 'img/casa.jpg'%}">
+        </div>
+        <div class="carousel-item blue white-text" href="#four!">
+          <img src="{% static 'img/timisoara.jpg'%}">
+        </div>
+      </div>
     </div>
+
   </div>
 
 
@@ -122,6 +137,11 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="{% static 'js/materialize.js'%}"></script>
   <script src="{% static 'js/init.js'%}"></script>
-
+  <script>
+      $('.carousel.carousel-slider').carousel({fullWidth: true});
+      window.setInterval(function () {
+          $('.carousel').carousel('next');
+      }, 2000);
+  </script>
   </body>
 </html>
