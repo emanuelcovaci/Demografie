@@ -6,3 +6,6 @@ def index(request):
 
 def graphics(request):
     return render(request,'grafic.html')
+
+def text(request):
+    return render(request,'homepages/text.html')
