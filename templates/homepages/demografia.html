@@ -1,0 +1,46 @@
+{% extends "base_main.html" %}
+{% load staticfiles sass_tags %}
+{% block content %}
+
+
+
+  <div class="container" style="margin-top: 15px;">
+    <div class="row">
+      <div class="col s12 m10 l10 offset-m1 offset-l1">
+        <div class="card">
+            <div class="card-content">
+            <div class="accent-text">
+              <center>
+                <h4>
+                  Ce este demografia ?
+                </h4>
+              </center>
+            </div>
+              <br>
+
+                <!--<div class="article-image" href="#one!">-->
+         <img style="width: 100%; height: auto;" src="{% static 'img/demografie2.png'%}">
+        <!--</div>-->
+
+             <p>
+               Demografia este studiul dinamicii populațiilor umane. Ea cuprinde studiul mărimii, structurii și distribuției populației, precum și modul în care o populație se modifică în timp în urma nașterilor, deceselor, migrației și îmbătrânirii. Analiza demografică se poate referi la societăți întregi sau la grupuri definite după diferite criterii: nivel de educație, naționalitate, religie, etc.
+             </p>
+              <br>
+              <p>
+                În demografie, se utilizează adesea cantități mari de date, colectate, de exemplu, din recensăminte și din registrele ținute de birourile de statistică a populației, în care se înregistrează nașterile, decesele, căsătoriile, etc. Datele demografice mai pot rezulta din sondaje efectuate în scop comercial, bazate pe metode de estimare indirectă. Primul recensământ modern a fost condus în SUA în 1790, cu toate că unele țări scandinave -- de exemplu, Islanda și Danemarca -- au avut recensăminte și mai devreme.
+
+În multe țări, în special în lumea a treia, obținerea unor date demografice de încredere este dificilă, în mintea multora recensământul fiind asociat cu taxarea, ceea ce îi determină să absenteze de la acest proces. În anii 1980, de exemplu, populația Nigeriei a fost estimată la 101 milioane, însă la recensământul din 1991, chiar ținând cont de fenomenul de absentare voită, numărul locuitorilor țării a trebuit reestimat la numai 89 de milioane.
+              </p>
+
+            </div>
+    <br><br>
+        </div></div></div></div>
+    <div class="section">
+
+    </div>
+  </div>
+ <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static 'js/materialize.js'%}"></script>
+  <script src="{% static 'js/init.js'%}"></script>
+
+ {% endblock %}
