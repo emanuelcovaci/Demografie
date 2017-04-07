@@ -1,0 +1,28 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+.carousel-img-wrapper{
+    position: relative !important;
+    overflow: hidden !important;
+    height: 400px !important;
+    width: 100% !important;
+}
+
+.carousel-img-wrapper img{
+    position: absolute !important;
+    top: -100% !important; left: -100% !important; right: -100% !important; bottom: -100% !important;
+    margin: auto !important;
+
+}
