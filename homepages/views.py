@@ -9,3 +9,7 @@ def graphics(request):
 
 def text(request):
     return render(request,'homepages/text.html')
+
+
+def dash(request):
+    return render(request,'common/base.html')
