@@ -10,6 +10,9 @@ def graphics(request):
 def text(request):
     return render(request,'homepages/text.html')
 
+def demografia(request):
+    return render(request,'homepages/demografia.html')
+
 
 def dash(request):
     return render(request,'common/base.html')

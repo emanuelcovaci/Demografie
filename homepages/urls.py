@@ -5,5 +5,6 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^graphics', views.graphics, name='graphics'),
     url(r'^text', views.text, name='text'),
+    url(r'^demografia', views.demografia, name='demografia'),
     url(r'^dash', views.dash, name='dash'),
 ]
