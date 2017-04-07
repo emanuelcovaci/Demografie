@@ -42,3 +42,35 @@
 @import "components/date_picker/default";
 @import "components/date_picker/default.date";
 @import "components/date_picker/default.time";
+
+.accent {
+  background-color: $secondary-color;
+}
+
+.accent-text {
+  color: $secondary-color;
+}
+
+.primary {
+  background-color: $primary-color;
+}
+
+.primary-text {
+  color: $primary-color;
+}
+
+.primary-dark {
+  background-color: $primary-color-dark;
+}
+
+.primary-dark-text {
+  color: $primary-color-dark;
+}
+
+.primary-light {
+  background-color: $primary-color-light;
+}
+
+.primary-light-text {
+  color: $primary-color-light;
+}
