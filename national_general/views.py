@@ -3,10 +3,12 @@ from pythonic.utility import add_dash_entry, DASH_ENTRIES, generate_list
 from django.urls.base import reverse_lazy
 # Create your views here.
 
-add_dash_entry("general", "General", 'general')
+add_dash_entry("national", "Nivel National", '')
+add_dash_entry("general", "Informatii Generale", 'general', parent='national')
+
 def general(request):
     print DASH_ENTRIES
-    request.session['active_entry'] = "general"
+    request.session['active_entry'] = "national/general"
     context = {
         'breadcrumbs': [
                 {"name": "General", "url_name": 'general'},        
