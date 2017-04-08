@@ -1,0 +1,195 @@
+{% extends "common/base.html" %}
+{% block content %}
+    <script>
+        var response1;
+        var aj1 = $.ajax({
+            url: "http://localhost:3000/agegrouppop",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){ 
+                response1 = msg
+            }
+        });
+        var response2;
+        var aj2 = $.ajax({
+            url: "http://localhost:3000/agegroupperc",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){ 
+                response2 = msg
+            }
+        });
+    </script>
+    <div class="row">
+        <div class="col s12 m6 l6">
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Informatii generale. Poulatia
+                        </div>
+                        <p><a href="https://ro.wikipedia.org/wiki/Demografie">Demografia</a> este studiul dinamicii 
+                        populaţiilor umane. Ea cuprinde studiul mărimii, structurii şi distribuţiei populaţiei, precum 
+                        şi modul în care o populaţie se modifică în timp în urma naşterilor, deceselor, migraţiei şi 
+                        îmbătrânirii. Analiza demografică se poate referi la societăţi întregi sau la grupuri definite 
+                        după diferite criterii: nivel de educaţie, naţionalitate, religie, etc.</p>
+                        <br>
+                        <p>In urma studiilor efectuate, Romania aveain anul 2015 a populatie de aproximativ 19870647 de 
+                        locuitori şi este de aşteptat ca în următorii ani să se înregistreze o scădere lentă a populaţiei 
+                        ca urmare a sporului natural negativ. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Tranzitia de la rural la urban
+                        </div>
+                        <p>In Romania, in prima etapa a comunismului, trasaturile principale ale familiei moderne se
+                        contureaza: dimensiunea redusa, scaderea numarului de copii, iar pe plan social,
+                        au loc rupturi de amploare: colectivizare fortata, migratia sat-oras care rupe
+                        legaturile sociale atat de puternice in trecut in mediul rural, impunerea
+                        anumitor ideologii, industrializarea agresiva si rapida.</p>
+                        <br>
+                        <p>Un factor de maximă importanţă pentru configuraţia trecută şi viitoare a resurselor umane
+                        din mediul rural, migraţia (mai ales sat – oraş) a cunoscut mari oscilaţii în
+                        ultimele patru decenii. Deplasarea populaţiei rurale către oraşe a fost un
+                        proces socio-economic obiectiv, observat în mai toate ţările lumii şi care a
+                        determinat creşterea gradului de urbanizare a fiecărei ţări, în  concordanţă cu nivelul de dezvoltare
+                        generală.</p>
+                        <br>
+                        <p>Odata cu procesele de migratie, urbanizare, industrializare si cu noul tip de viata
+                        sociala cauzata de aceasta, apar modificari in dimensiunea familiei si in modul
+                        de gandire. Familia se miscoreaza, copiii devenind un nucleu principal al
+                        familiei si nu mai au o importanta ca forta de munca. Desi pus intr-un alt
+                        mediu fata de trecut, omul nu isi poate schimba natura si nevoia de apartenenta
+                        la un grup: de interes, social.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l6">
+            <div class="row">
+              <div class="card">
+                <div class="card-content">
+                    <div class="card-title center-align">
+                        Evolutia populatiei pe grupe de varsta
+                    </div>
+                    <center>
+                        <div id="agepop"></div>
+                    </center>
+                    <script>
+                
+                        $.when(aj1).done(function(){
+                            chart = anychart.area();
+                    
+                            var totaldata = [];
+                            var minoridata = [];
+                            var majoridata = [];
+                            var senioridata = [];
+                            
+                            $.each(response1, function(i, el){
+                                totaldata.push([el["year"], el["total"]]);
+                                minoridata.push([el["year"], el["age0_4"] + el["age5_9"] + el["age10_14"] + el["age15_19"]]);
+                                majoridata.push([el["year"], el["age20_24"] + el["age25_29"] + el["age30_34"] + el["age35_39"] + el["age40_44"] + el["age45_49"] + el["age50_54"] + el["age55_59"] + el["age60_64"]]);
+                                senioridata.push([el["year"], el["age65_69"] + el["age70_74"] + el["age75_79"] + el["age80_84"] + el["age85"]]);
+                            });
+                            
+                            total = chart.area(totaldata);
+                            total.name("Total");
+                            total.color("#5140f7");
+                            total.zIndex(2.0001);
+                            minori = chart.area(minoridata);
+                            minori.name("Minori");
+                            minori.color("#fc23f1");
+                            minori.zIndex(30.0001);
+                            majori = chart.area(majoridata);
+                            majori.name("Adulti");
+                            majori.color("#ba9510");
+                            majori.zIndex(5.0001);
+                            seniori = chart.area(senioridata);
+                            seniori.name("Pensionari");
+                            seniori.color("#990000");
+                            seniori.zIndex(40.0001);
+                            
+                            var legend = chart.legend();
+                            legend.enabled(true);
+                            chart.container("agepop");
+                            chart.draw();
+                        });
+                
+                    </script>
+                    <style>
+                        #agepop {
+                            height: 300px;
+                            margin: 0;
+                            padding: 0;
+                        }
+                    </style>
+                </div>
+            </div>
+            <div class="row">
+              <div class="card">
+                <div class="card-content">
+                    <div class="card-title center-align">
+                        Evolutia populatiei pe grupe de varsta ca procente.
+                    </div>
+                    <center>
+                        <div id="ageperc"></div>
+                    </center>
+                    <script>
+                
+                        $.when(aj2).done(function(){
+                            chart = anychart.area();
+                            console.log(response2);
+                            var minoridata = [];
+                            var majoridata = [];
+                            var senioridata = [];
+                            
+                            $.each(response2, function(i, el){
+                                minoridata.push([el["year"], el["age0_4"] + el["age5_9"] + el["age10_14"] + el["age15_19"]]);
+                                majoridata.push([el["year"], el["age20_24"] + el["age25_29"] + el["age30_34"] + el["age35_39"] + el["age40_44"] + el["age45_49"] + el["age50_54"] + el["age55_59"] + el["age60_64"]]);
+                                senioridata.push([el["year"], el["age65_69"] + el["age70_74"] + el["age75_79"] + el["age80_84"] + el["age85"]]);
+                            });
+                            
+                            minori = chart.area(minoridata);
+                            minori.name("Minori");
+                            minori.color("#fc23f1");
+                            minori.zIndex(30.0001);
+                            majori = chart.area(majoridata);
+                            majori.name("Adulti");
+                            majori.color("#ba9510");
+                            majori.zIndex(5.0001);
+                            seniori = chart.area(senioridata);
+                            seniori.name("Pensionari");
+                            seniori.color("#990000");
+                            seniori.zIndex(40.0001);
+                            
+                            var legend = chart.legend();
+                            legend.enabled(true);
+                            chart.container("ageperc");
+                            chart.draw();
+                        });
+                
+                    </script>
+                    <style>
+                        #ageperc {
+                            height: 300px;
+                            margin: 0;
+                            padding: 0;
+                        }
+                    </style>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
