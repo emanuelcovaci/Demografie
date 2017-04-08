@@ -12,7 +12,7 @@
       <link href="{% static 'css/style.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
       <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script src="{% static 'js/materialize.js'%}"></script>
-      
+
       <script src="https://cdn.anychart.com/js/7.13.0/anychart-bundle.min.js"></script>
       <link rel="stylesheet" href="https://cdn.anychart.com/css/7.13.0/anychart-ui.min.css" />
     </head>
@@ -31,15 +31,17 @@
                     <a href="#!email"><span class="white-text email">presa@ms.ro</span></a>
                 </div>
             </li>
+  <li><a href="/" class="collapsible-header "><i class="material-icons">undo</i>Inapoi </a></li>
             <li class="active">
+
                 <ul class="collapsible collapsible-accordion">
+
                     {% block list %}
                         {{ list | safe }}
                     {% endblock %}
                 </ul>
             </li>
-            <li><a href="#!">First Sidebar Link</a></li>
-            <li><a href="#!">Second Sidebar Link</a></li>
+
         </ul>
 
         <nav>
@@ -71,7 +73,7 @@
                   O analiza detaliata a demografiei Romaniei pe baza
                   staticticilor primite de la Guvernul Romaniei
                 </li>
-                
+
               </ul>
             </div>
           </div>
@@ -95,7 +97,7 @@
                 }
             });
         });
-        
+
         $("a.collapsible-header").on("click", function(){
             $(this).parent().parent().parent().parent().children().removeClass("active");
         });
