@@ -22,8 +22,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'l4(+uu&2&&fymxdr3+30!)ls+%zz&3)@3z@npf8e2m#0xrip_^'
 
+#Recaptcha key
+RECAPTCHA_PUBLIC_KEY = '6LemJBwUAAAAAKoGDehr9PXhtm37yIFVh4-8IGgI'
+RECAPTCHA_PRIVATE_KEY = '6LemJBwUAAAAAIh69Wu4iYCivMZg6BoPn87Wiy8C'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+from .local import EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_PORT
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST=EMAIL_HOST
+EMAIL_HOST_USER=EMAIL_HOST_USER#insert email
+EMAIL_HOST_PASSWORD=EMAIL_HOST_PASSWORD#insert password
+EMAIL_PORT=EMAIL_PORT
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ALLOWED_HOSTS = []
 
@@ -39,8 +53,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'sass_processor',
+    'widget_tweaks',
+    'captcha',
 
     'homepages',
+    'contact',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -150,3 +167,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticcollected")
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+NOCAPTCHA = True
+RECAPTCHA_USE_SSL = False
