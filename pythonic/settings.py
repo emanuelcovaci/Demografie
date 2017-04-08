@@ -25,6 +25,16 @@ SECRET_KEY = 'l4(+uu&2&&fymxdr3+30!)ls+%zz&3)@3z@npf8e2m#0xrip_^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+from .local import EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_PORT
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST=EMAIL_HOST
+EMAIL_HOST_USER=EMAIL_HOST_USER#insert email
+EMAIL_HOST_PASSWORD=EMAIL_HOST_PASSWORD#insert password
+EMAIL_PORT=EMAIL_PORT
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 ALLOWED_HOSTS = []
 
 
@@ -41,6 +51,7 @@ INSTALLED_APPS = [
     'sass_processor',
 
     'homepages',
+    'contact',
 ]
 
 MIDDLEWARE_CLASSES = [
