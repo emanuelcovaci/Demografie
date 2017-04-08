@@ -14,6 +14,9 @@ add_dash_entry("deaths", "Decese", '', parent='national/phenomena')
 add_dash_entry("mortality", "Mortalitatea", 'mortality', parent='national/phenomena/deaths')
 add_dash_entry("abortdeaths", "Decese prin avort", 'abortdeaths', parent='national/phenomena/deaths')
 add_dash_entry("infantdeaths", "Decese copii sub 1 an", 'infantdeaths', parent='national/phenomena/deaths')
+add_dash_entry("borndead", "Nascuti morti", 'borndead', parent='national/phenomena/deaths')
+add_dash_entry("naturalincrease", "Sporul natural", 'naturalincrease', parent='national/phenomena')
+add_dash_entry("marriage", "Casatorii/Divorturi", 'marriage', parent='national/phenomena')
 
 def general(request):
     request.session['active_entry'] = "national/general"
@@ -23,7 +26,7 @@ def general(request):
             ],
         'list': generate_list(request),
     }
-    return render(request,'national_general/general.html', context)
+    return render(request,'national/general.html', context)
 
 def agegroup(request):
     request.session['active_entry'] = "national/agegroup"
@@ -33,7 +36,7 @@ def agegroup(request):
             ],
         'list': generate_list(request),
     }
-    return render(request,'national_general/agegroup.html', context)
+    return render(request,'national/agegroup.html', context)
 
 
 def natality(request):
@@ -45,7 +48,7 @@ def natality(request):
             ],
         'list': generate_list(request),
     }
-    return render(request,'national_general/natality.html', context)
+    return render(request,'national/natality.html', context)
 
 
 def fertility(request):
@@ -57,7 +60,7 @@ def fertility(request):
             ],
         'list': generate_list(request),
     }
-    return render(request,'national_general/fertility.html', context)
+    return render(request,'national/fertility.html', context)
 
 def aborts(request):
     print DASH_ENTRIES
@@ -69,7 +72,7 @@ def aborts(request):
             ],
         'list': generate_list(request),
     }
-    return render(request,'national_general/aborts.html', context)
+    return render(request,'national/aborts.html', context)
 
 def mortality(request):
     print DASH_ENTRIES
@@ -82,7 +85,7 @@ def mortality(request):
             ],
         'list': generate_list(request),
     }
-    return render(request,'national_general/mortality.html', context)
+    return render(request,'national/mortality.html', context)
 
 def abortdeaths(request):
     print DASH_ENTRIES
@@ -91,11 +94,11 @@ def abortdeaths(request):
         'breadcrumbs': [
                 {"name": "Fenomene Demografice", "url_name": 'natality'}, 
                 {"name": "Decese", "url_name": 'mortality'},    
-                {"name": "Decese prin avort", "url_name": 'abortdeaths'},        
+                {"name": "Decese Prin Avort", "url_name": 'abortdeaths'},        
             ],
         'list': generate_list(request),
     }
-    return render(request,'national_general/abortdeaths.html', context)
+    return render(request,'national/abortdeaths.html', context)
 
 def infantdeaths(request):
     print DASH_ENTRIES
@@ -104,8 +107,46 @@ def infantdeaths(request):
         'breadcrumbs': [
                 {"name": "Fenomene Demografice", "url_name": 'natality'}, 
                 {"name": "Decese", "url_name": 'mortality'},    
-                {"name": "Decese copii sub 1 an", "url_name": 'infantdeaths'},        
+                {"name": "Decese Copii Sub 1 An", "url_name": 'infantdeaths'},        
             ],
         'list': generate_list(request),
     }
-    return render(request,'national_general/infantdeaths.html', context)
+    return render(request,'national/infantdeaths.html', context)
+
+def borndead(request):
+    print DASH_ENTRIES
+    request.session['active_entry'] = "national/phenomena/deaths/borndead"
+    context = {
+        'breadcrumbs': [
+                {"name": "Fenomene Demografice", "url_name": 'natality'}, 
+                {"name": "Decese", "url_name": 'mortality'},    
+                {"name": "Nascuti Morti", "url_name": 'borndead'},        
+            ],
+        'list': generate_list(request),
+    }
+    return render(request,'national/borndead.html', context)
+
+def naturalincrease(request):
+    print DASH_ENTRIES
+    request.session['active_entry'] = "national/phenomena/naturalincrease"
+    context = {
+        'breadcrumbs': [
+                {"name": "Fenomene Demografice", "url_name": 'natality'}, 
+                {"name": "Sporul Natural", "url_name": 'naturalincrease'},        
+            ],
+        'list': generate_list(request),
+    }
+    return render(request,'national/naturalincrease.html', context)
+
+
+def marriage(request):
+    print DASH_ENTRIES
+    request.session['active_entry'] = "national/phenomena/marriage"
+    context = {
+        'breadcrumbs': [
+                {"name": "Fenomene Demografice", "url_name": 'natality'}, 
+                {"name": "Casatorii/Divorturi", "url_name": 'marriage'},        
+            ],
+        'list': generate_list(request),
+    }
+    return render(request,'national/marriage.html', context)

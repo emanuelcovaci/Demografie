@@ -4,4 +4,4 @@ from django.apps import AppConfig
 
 
 class NationalGeneralConfig(AppConfig):
-    name = 'national_general'
+    name = 'national'
