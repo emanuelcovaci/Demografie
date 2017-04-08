@@ -11,7 +11,7 @@ def contact(request):
         send_form = SendMailForm(request.POST)
         confirm = []
         if send_form.is_valid():
-            subject = "Comanda"
+            subject = "Contact"
             messages = send_form.cleaned_data['sender_text']
             from_email = settings.EMAIL_HOST_USER
             to_list = [send_form.cleaned_data['sender_email'],settings.EMAIL_HOST_USER]
