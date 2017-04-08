@@ -3,7 +3,7 @@
 {% block content %}
 
    <style>
-      #container  {
+      #container_chart  {
 
         height:300px;
         margin: 0;
@@ -40,7 +40,7 @@
             <div class="card-content">
 
                   <center>
-                   <div id="container"></div>
+                   <div id="container_chart"></div>
                  </center>
             </div>
 
@@ -99,7 +99,8 @@ anychart.onDocumentReady(function () {
    chart = anychart.pie([12, 2, 1.4]);
 
    chart.title("Create a Pie chart");
-   chart.container("container");
+   chart.container("container_chart");
+
    chart.draw();
 });
 
@@ -118,18 +119,15 @@ anychart.onDocumentReady(function () {
        ["Oranges", 6, 29, 11, 46, 19, 49]
    ]);
 
-   var legend = chart.legend();
-   legend.enabled(true);
-   legend.maxWidth("20%");
 
-   // Set items layout.
-   legend.itemsLayout(anychart.enums.LegendLayout.HORIZONTAL_EXPANDABLE);
+  var legend = chart.legend();
+legend.enabled(true);
 
-   var seriesName = ["Florida", "Texas", "Arizona", "Nevada", "Oregon", "Idaho"];
+ var seriesName = ["Florida", "Texas", "Arizona", "Nevada", "Oregon", "Idaho"];
 
-   for (var i = 0; i < chart.getSeriesCount(); i++) {
-       chart.getSeriesAt(i).name(seriesName[i]);
-   }
+ for (var i = 0; i < chart.getSeriesCount(); i++) {
+     chart.getSeriesAt(i).name(seriesName[i]);
+ }
 
    chart.title("Set items layout");
    chart.container("piechart");
