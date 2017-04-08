@@ -41,4 +41,4 @@ def natality(request):
             ],
         'list': generate_list(request),
     }
-    return render(request,'national_general/agegroup.html', context)
+    return render(request,'national_general/natality.html', context)

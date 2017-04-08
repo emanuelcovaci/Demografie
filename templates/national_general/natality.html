@@ -1,9 +1,9 @@
 {% extends "common/base.html" %}
 {% block content %}
     <script>
-        var response1;
-        var aj1 = $.ajax({
-            url: "http://localhost:3000/agegrouppop",
+        var response;
+        var aj = $.ajax({
+            url: "http://localhost:3000/misc",
             type: 'GET',
             async: true,
             cache: true,
@@ -11,20 +11,7 @@
             error: function(){
             },
             success: function(msg){
-                response1 = msg
-            }
-        });
-        var response2;
-        var aj2 = $.ajax({
-            url: "http://localhost:3000/agegroupperc",
-            type: 'GET',
-            async: true,
-            cache: true,
-            timeout: 30000,
-            error: function(){
-            },
-            success: function(msg){
-                response2 = msg
+                response = msg
             }
         });
     </script>
@@ -68,54 +55,36 @@
               <div class="card">
                 <div class="card-content">
                     <div class="card-title center-align">
-                        Evolutia populatiei pe grupe de varsta
+                        Evolutia numarului de nou nascuti
                     </div>
                     <center>
-                        <div id="agepop"></div>
+                        <div id="newborn"></div>
                     </center>
                     <script>
 
-                        $.when(aj1).done(function(){
+                        $.when(aj).done(function(){
                             chart = anychart.area();
 
                             var totaldata = [];
-                            var minoridata = [];
-                            var majoridata = [];
-                            var senioridata = [];
 
-                            $.each(response1, function(i, el){
-                                totaldata.push([el["year"], el["total"]]);
-                                minoridata.push([el["year"], el["age0_4"] + el["age5_9"] + el["age10_14"] + el["age15_19"]]);
-                                majoridata.push([el["year"], el["age20_24"] + el["age25_29"] + el["age30_34"] + el["age35_39"] + el["age40_44"] + el["age45_49"] + el["age50_54"] + el["age55_59"] + el["age60_64"]]);
-                                senioridata.push([el["year"], el["age65_69"] + el["age70_74"] + el["age75_79"] + el["age80_84"] + el["age85"]]);
+                            $.each(response, function(i, el){
+                                totaldata.push([el["year"], el["bornalive"]]);
                             });
 
                             total = chart.area(totaldata);
-                            total.name("Total");
+                            total.name("Nou nascuti");
                             total.color("#5140f7");
                             total.zIndex(2.0001);
-                            minori = chart.area(minoridata);
-                            minori.name("Minori");
-                            minori.color("#fc23f1");
-                            minori.zIndex(30.0001);
-                            majori = chart.area(majoridata);
-                            majori.name("Adulti");
-                            majori.color("#ba9510");
-                            majori.zIndex(5.0001);
-                            seniori = chart.area(senioridata);
-                            seniori.name("Pensionari");
-                            seniori.color("#990000");
-                            seniori.zIndex(40.0001);
 
                             var legend = chart.legend();
                             legend.enabled(true);
-                            chart.container("agepop");
+                            chart.container("newborn");
                             chart.draw();
                         });
 
                     </script>
                     <style>
-                        #agepop {
+                        #newborn {
                             height: 300px;
                             margin: 0;
                             padding: 0;
@@ -127,48 +96,37 @@
               <div class="card">
                 <div class="card-content">
                     <div class="card-title center-align">
-                        Evolutia populatiei pe grupe de varsta ca procente.
+                        Evolutia natalitatii (numarul de nou nascuti la 100 de locuitori)
                     </div>
                     <center>
-                        <div id="ageperc"></div>
+                        <div id="natality"></div>
                     </center>
                     <script>
 
-                        $.when(aj2).done(function(){
+                        $.when(aj).done(function(){
                             chart = anychart.area();
-                            console.log(response2);
                             var minoridata = [];
                             var majoridata = [];
                             var senioridata = [];
 
-                            $.each(response2, function(i, el){
-                                minoridata.push([el["year"], el["age0_4"] + el["age5_9"] + el["age10_14"] + el["age15_19"]]);
-                                majoridata.push([el["year"], el["age20_24"] + el["age25_29"] + el["age30_34"] + el["age35_39"] + el["age40_44"] + el["age45_49"] + el["age50_54"] + el["age55_59"] + el["age60_64"]]);
-                                senioridata.push([el["year"], el["age65_69"] + el["age70_74"] + el["age75_79"] + el["age80_84"] + el["age85"]]);
+                            $.each(response, function(i, el){
+                                minoridata.push([el["bornaliveperc"]]);
                             });
 
                             minori = chart.area(minoridata);
-                            minori.name("Minori");
+                            minori.name("Natalitate");
                             minori.color("#fc23f1");
                             minori.zIndex(30.0001);
-                            majori = chart.area(majoridata);
-                            majori.name("Adulti");
-                            majori.color("#ba9510");
-                            majori.zIndex(5.0001);
-                            seniori = chart.area(senioridata);
-                            seniori.name("Pensionari");
-                            seniori.color("#990000");
-                            seniori.zIndex(40.0001);
 
                             var legend = chart.legend();
                             legend.enabled(true);
-                            chart.container("ageperc");
+                            chart.container("natality");
                             chart.draw();
                         });
 
                     </script>
                     <style>
-                        #ageperc {
+                        #natality {
                             height: 300px;
                             margin: 0;
                             padding: 0;
