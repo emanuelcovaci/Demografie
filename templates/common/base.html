@@ -5,7 +5,7 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
       <title>Pythonic</title>
-    
+
       <!-- CSS  -->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <link href="{% sass_src 'sass/materialize.scss'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -13,10 +13,10 @@
       <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script src="{% static 'js/materialize.js'%}"></script>
     </head>
-    
-    <body class="dash">        
+
+    <body class="dash">
       <header>
-          
+
         <ul id="slide-out" class="side-nav fixed">
             <li>
                 <div class="userView" style="margin-bottom: 0px;">
@@ -75,36 +75,33 @@
           </div>
         </nav>
       </header>
-    
+
       <main>
         {% block content %}
         {% endblock %}
-      </main> 
-    
+      </main>
+
       <footer class="page-footer">
         <div class="container">
           <div class="row">
             <div class="col s12">
-              <h5 class="white-text">Icon Credits</h5>
+              <h5 class="white-text">Pythonic</h5>
               <ul id='credits'>
                 <li class="white-text">
-                  Gif Logo made using <a href="http://formtypemaker.appspot.com/" title="Form Type Maker">Form Type Maker</a> from <a href="https://github.com/romannurik/FORMTypeMaker" title="romannurik">romannurik</a>
+                  O analiza detaliata a demografiei Romaniei pe baza
+                  staticticilor primite de la Guvernul Romaniei
                 </li>
-                <li class="white-text">
-                  Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"
-                    target="_blank">CC 3.0 BY</a>
-                </li>
-                <li class="white-text">
-                  Icons made by <a href="http://www.flaticon.com/authors/picol" title="Picol">Picol</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"
-                    target="_blank">CC 3.0 BY</a>
-                </li>
+                
               </ul>
             </div>
           </div>
         </div>
         <div class="footer-copyright">
           <div class="container">
-            <span>Made By <a style='font-weight: bold;' href="">Tirth Patel</a></span>
+            <span>Made By <a style='font-weight: bold;' href="">
+              <a href="https://github.com/emanuelcovaci">Emanuel Covaci, </a>
+                 <a href="https://github.com/adriangaro"> Adrian Garovat</a>
+            </a></span>
           </div>
         </div>
       </footer>
@@ -120,5 +117,5 @@
         });
       </script>
     </body>
-    
+
 </html>
