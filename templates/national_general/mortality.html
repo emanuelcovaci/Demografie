@@ -65,10 +65,10 @@ După 1989, numărul nou-născuţilor din România a scăzut dramatic. Astfel, d
               <div class="card">
                 <div class="card-content">
                     <div class="card-title center-align">
-                        Evolutia numarului de nou nascuti in timp
+                        Evolutia numarului de decese in timp
                     </div>
                     <center>
-                        <div id="newborn"></div>
+                        <div id="dead"></div>
                     </center>
                     <script>
 
@@ -78,23 +78,23 @@ După 1989, numărul nou-născuţilor din România a scăzut dramatic. Astfel, d
                             var totaldata = [];
 
                             $.each(response, function(i, el){
-                                totaldata.push([el["year"], el["bornalive"]]);
+                                totaldata.push([el["year"], el["deceased"]]);
                             });
 
                             total = chart.area(totaldata);
-                            total.name("Nou nascuti");
+                            total.name("Decese");
                             total.color("#5140f7");
                             total.zIndex(2.0001);
 
                             var legend = chart.legend();
                             legend.enabled(true);
-                            chart.container("newborn");
+                            chart.container("dead");
                             chart.draw();
                         });
 
                     </script>
                     <style>
-                        #newborn {
+                        #dead {
                             height: 400px;
                             margin: 0;
                             padding: 0;
@@ -106,10 +106,10 @@ După 1989, numărul nou-născuţilor din România a scăzut dramatic. Astfel, d
               <div class="card">
                 <div class="card-content">
                     <div class="card-title center-align">
-                        Evolutia natalitatii (numarul de nou nascuti la 1000 de locuitori) in timp
+                        Evolutia mortalitatii (numarul de decese la 1000 de locuitori) in timp
                     </div>
                     <center>
-                        <div id="natality"></div>
+                        <div id="mortality"></div>
                     </center>
                     <script>
 
@@ -120,23 +120,23 @@ După 1989, numărul nou-născuţilor din România a scăzut dramatic. Astfel, d
                             var senioridata = [];
 
                             $.each(response, function(i, el){
-                                minoridata.push([el["year"], el["bornaliveperc"]]);
+                                minoridata.push([el["year"], el["deceasedperc"]]);
                             });
 
                             minori = chart.area(minoridata);
-                            minori.name("Natalitate");
+                            minori.name("Mortalitatea");
                             minori.color("#fc23f1");
                             minori.zIndex(30.0001);
 
                             var legend = chart.legend();
                             legend.enabled(true);
-                            chart.container("natality");
+                            chart.container("mortality");
                             chart.draw();
                         });
 
                     </script>
                     <style>
-                        #natality {
+                        #mortality {
                             height: 400px;
                             margin: 0;
                             padding: 0;
