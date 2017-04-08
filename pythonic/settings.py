@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'captcha',
 
     'homepages',
-    'national_general',
+    'national',
     'contact',
 ]
 
