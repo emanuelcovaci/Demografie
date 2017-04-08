@@ -48,7 +48,7 @@
             <a style="margin-left: 20px;" class="breadcrumb" href="/statistics/general">Home</a>
             {% block breadcrumbs %}
                 {% for ist in breadcrumbs %}
-                    <a style="margin-left: 20px;" class="breadcrumb" href="{% url ist.url_name %}">{{ ist.name }}</a>
+                    <a style="margin-left: 20px;" class="breadcrumb" href="{{ ist.url }}">{{ ist.name }}</a>
                 {% endfor %}
             {% endblock %}
             <div style="margin-right: 20px;" id="timestamp" class="right"></div>

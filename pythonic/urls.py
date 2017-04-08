@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^', include('national.urls')),
     url(r'^', include('homepages.urls')),
+    url(r'^', include('county.urls')),
     url(r'^', include('contact.urls')),
 ]
 

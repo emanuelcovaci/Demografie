@@ -3,12 +3,12 @@ Created on Apr 8, 2017
 
 @author: roadd
 '''
-from django.urls.base import reverse_lazy
+from django.urls.base import reverse_lazy, reverse
 from captcha.client import request
 
 DASH_ENTRIES = {}
 
-def add_dash_entry(name, verbose_name, url, icon='label', parent=""):
+def add_dash_entry(name, verbose_name, url, icon='label', parent="", kwargs={}):
     relation = parent.split("/")
     parent = DASH_ENTRIES
     if relation[0] is not "":
@@ -20,6 +20,7 @@ def add_dash_entry(name, verbose_name, url, icon='label', parent=""):
         "url_name": url,
         "icon": icon,
         "children" : {},
+        "kwargs": kwargs,
     }
 
 def recursive_entry(entries, depth, active_entries=[], parent_active=False):
@@ -31,7 +32,7 @@ def recursive_entry(entries, depth, active_entries=[], parent_active=False):
             text += '<li class="active">\
                         <ul class="collapsible collapsible-accordion">\
                             <li>\
-                                <a style="padding-left: 16px;" href="' + (unicode(reverse_lazy(entry["url_name"]) if entry["url_name"] else "#") if not has_children else '#') + '" class="collapsible-header active"><i style="margin-left:' + str(depth * 2) + '0px" class="material-icons">' + entry["icon"] + '</i>' + entry["verbose_name"] + '</a>\
+                                <a style="padding-left: 16px;" href="' + (unicode(reverse(entry["url_name"], kwargs=entry["kwargs"]) if entry["url_name"] else "#") if not has_children else '#') + '" class="collapsible-header active"><i style="margin-left:' + str(depth * 2) + '0px" class="material-icons">' + entry["icon"] + '</i>' + entry["verbose_name"] + '</a>\
                                 <div class="collapsible-body" style="display:block">\
                                     <ul>' + \
                                         recursive_entry(entry, depth + 1, active_entries[1:], True) + \
@@ -44,7 +45,7 @@ def recursive_entry(entries, depth, active_entries=[], parent_active=False):
             text += '<li>\
                         <ul class="collapsible collapsible-accordion">\
                             <li>\
-                                <a style="padding-left: 16px;"  href="' + (unicode(reverse_lazy(entry["url_name"]) if entry["url_name"] else "#") if not has_children else '#') + '" class="collapsible-header"><i style="margin-left:' + str(depth * 2) + '0px" class="material-icons">' + entry["icon"] + '</i>' + entry["verbose_name"] + '</a>\
+                                <a style="padding-left: 16px;"  href="' + (unicode(reverse(entry["url_name"], kwargs=entry["kwargs"]) if entry["url_name"] else "#") if not has_children else '#') + '" class="collapsible-header"><i style="margin-left:' + str(depth * 2) + '0px" class="material-icons">' + entry["icon"] + '</i>' + entry["verbose_name"] + '</a>\
                                 <div class="collapsible-body">\
                                     <ul>' + \
                                         recursive_entry(entry, depth + 1) + \
@@ -75,7 +76,7 @@ def generate_list(request):
         has_children = len(entry["children"]) > 0
         if entry_active(entry, active_entries):
             text += '<li class="active">\
-                        <a href="' + (unicode(reverse_lazy(entry["url_name"]) if entry["url_name"] else "#") if not has_children else '#') + '" class="collapsible-header active"><i class="material-icons">' + entry["icon"] + '</i>' + entry["verbose_name"] + '</a>\
+                        <a href="' + (unicode(reverse(entry["url_name"], kwargs=entry["kwargs"]) if entry["url_name"] else "#") if not has_children else '#') + '" class="collapsible-header active"><i class="material-icons">' + entry["icon"] + '</i>' + entry["verbose_name"] + '</a>\
                         <div class="collapsible-body" style="display:block">\
                             <ul>' + \
                                 recursive_entry(entry, 1, active_entries[1:], True) + \
@@ -84,7 +85,7 @@ def generate_list(request):
                     </li>'
         else:
             text += '<li>\
-                        <a href="' + (unicode(reverse_lazy(entry["url_name"]) if entry["url_name"] else "#") if not has_children else '#') + '" class="collapsible-header"><i class="material-icons">' + entry["icon"] + '</i>' + entry["verbose_name"] + '</a>\
+                        <a href="' + (unicode(reverse(entry["url_name"], kwargs=entry["kwargs"]) if entry["url_name"] else "#") if not has_children else '#') + '" class="collapsible-header"><i class="material-icons">' + entry["icon"] + '</i>' + entry["verbose_name"] + '</a>\
                         <div class="collapsible-body">\
                             <ul>' + \
                                 recursive_entry(entry, 1) + \

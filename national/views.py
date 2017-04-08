@@ -22,7 +22,7 @@ def general(request):
     request.session['active_entry'] = "national/general"
     context = {
         'breadcrumbs': [
-                {"name": "Informatii Generale", "url_name": 'general'},        
+                {"name": "Informatii Generale", "url": reverse_lazy('general')},        
             ],
         'list': generate_list(request),
     }
@@ -32,7 +32,7 @@ def agegroup(request):
     request.session['active_entry'] = "national/agegroup"
     context = {
         'breadcrumbs': [
-                {"name": "Varsta Populatiei", "url_name": 'agegroup'},        
+                {"name": "Varsta Populatiei", "url": reverse_lazy('agegroup')},        
             ],
         'list': generate_list(request),
     }
@@ -43,8 +43,8 @@ def natality(request):
     request.session['active_entry'] = "national/phenomena/natality"
     context = {
         'breadcrumbs': [
-                {"name": "Fenomene Demografice", "url_name": 'natality'},
-                {"name": "Natalitate", "url_name": 'natality'},        
+                {"name": "Fenomene Demografice", "url": reverse_lazy('natality')},
+                {"name": "Natalitate", "url": reverse_lazy('natality')},        
             ],
         'list': generate_list(request),
     }
@@ -55,8 +55,8 @@ def fertility(request):
     request.session['active_entry'] = "national/phenomena/fertility"
     context = {
         'breadcrumbs': [
-                {"name": "Fenomene Demografice", "url_name": 'natality'},
-                {"name": "Fertilitate", "url_name": 'fertility'},        
+                {"name": "Fenomene Demografice", "url": reverse_lazy('natality')},
+                {"name": "Fertilitate", "url": reverse_lazy('fertility')},        
             ],
         'list': generate_list(request),
     }
@@ -67,8 +67,8 @@ def aborts(request):
     request.session['active_entry'] = "national/phenomena/aborts"
     context = {
         'breadcrumbs': [
-                {"name": "Fenomene Demografice", "url_name": 'natality'}, 
-                {"name": "Avorturi", "url_name": 'aborts'},        
+                {"name": "Fenomene Demografice", "url": reverse_lazy('natality')}, 
+                {"name": "Avorturi", "url": reverse_lazy('aborts')},        
             ],
         'list': generate_list(request),
     }
@@ -79,9 +79,9 @@ def mortality(request):
     request.session['active_entry'] = "national/phenomena/deaths/mortality"
     context = {
         'breadcrumbs': [
-                {"name": "Fenomene Demografice", "url_name": 'natality'}, 
-                {"name": "Decese", "url_name": 'mortality'},    
-                {"name": "Mortalitatea", "url_name": 'mortality'},        
+                {"name": "Fenomene Demografice", "url": reverse_lazy('natality')}, 
+                {"name": "Decese", "url": reverse_lazy('mortality')},    
+                {"name": "Mortalitatea", "url": reverse_lazy('mortality')},        
             ],
         'list': generate_list(request),
     }
@@ -92,9 +92,9 @@ def abortdeaths(request):
     request.session['active_entry'] = "national/phenomena/deaths/abortdeaths"
     context = {
         'breadcrumbs': [
-                {"name": "Fenomene Demografice", "url_name": 'natality'}, 
-                {"name": "Decese", "url_name": 'mortality'},    
-                {"name": "Decese Prin Avort", "url_name": 'abortdeaths'},        
+                {"name": "Fenomene Demografice", "url": reverse_lazy('natality')}, 
+                {"name": "Decese", "url": reverse_lazy('mortality')},    
+                {"name": "Decese Prin Avort", "url": reverse_lazy('abortdeaths')},        
             ],
         'list': generate_list(request),
     }
@@ -105,9 +105,9 @@ def infantdeaths(request):
     request.session['active_entry'] = "national/phenomena/deaths/infantdeaths"
     context = {
         'breadcrumbs': [
-                {"name": "Fenomene Demografice", "url_name": 'natality'}, 
-                {"name": "Decese", "url_name": 'mortality'},    
-                {"name": "Decese Copii Sub 1 An", "url_name": 'infantdeaths'},        
+                {"name": "Fenomene Demografice", "url": reverse_lazy('natality')}, 
+                {"name": "Decese", "url": reverse_lazy('mortality')},    
+                {"name": "Decese Copii Sub 1 An", "url": reverse_lazy('infantdeaths')},        
             ],
         'list': generate_list(request),
     }
@@ -118,9 +118,9 @@ def borndead(request):
     request.session['active_entry'] = "national/phenomena/deaths/borndead"
     context = {
         'breadcrumbs': [
-                {"name": "Fenomene Demografice", "url_name": 'natality'}, 
-                {"name": "Decese", "url_name": 'mortality'},    
-                {"name": "Nascuti Morti", "url_name": 'borndead'},        
+                {"name": "Fenomene Demografice", "url": reverse_lazy('natality')}, 
+                {"name": "Decese", "url": reverse_lazy('mortality')},    
+                {"name": "Nascuti Morti", "url": reverse_lazy('borndead')},        
             ],
         'list': generate_list(request),
     }
@@ -131,8 +131,8 @@ def naturalincrease(request):
     request.session['active_entry'] = "national/phenomena/naturalincrease"
     context = {
         'breadcrumbs': [
-                {"name": "Fenomene Demografice", "url_name": 'natality'}, 
-                {"name": "Sporul Natural", "url_name": 'naturalincrease'},        
+                {"name": "Fenomene Demografice", "url": reverse_lazy('natality')}, 
+                {"name": "Sporul Natural", "url": reverse_lazy('naturalincrease')},        
             ],
         'list': generate_list(request),
     }
@@ -144,8 +144,8 @@ def marriage(request):
     request.session['active_entry'] = "national/phenomena/marriage"
     context = {
         'breadcrumbs': [
-                {"name": "Fenomene Demografice", "url_name": 'natality'}, 
-                {"name": "Casatorii/Divorturi", "url_name": 'marriage'},        
+                {"name": "Fenomene Demografice", "url": reverse_lazy('natality')}, 
+                {"name": "Casatorii/Divorturi", "url": reverse_lazy('marriage')},        
             ],
         'list': generate_list(request),
     }

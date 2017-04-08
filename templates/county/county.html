@@ -1,0 +1,615 @@
+{% extends "common/base.html" %}
+{% block content %}
+    <script>
+        var popresponse;
+        var popaj = $.ajax({
+            url: "http://localhost:3000/countypop",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){
+                popresponse = msg
+            }
+        });
+        
+        var natresponse;
+        var nataj = $.ajax({
+            url: "http://localhost:3000/natalitycounty",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){
+                natresponse = msg
+            }
+        });
+        
+        var natpercresponse;
+        var natpercaj = $.ajax({
+            url: "http://localhost:3000/natalitycountyperc",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){
+                natpercresponse = msg
+            }
+        });
+        
+        var fertpercresponse;
+        var fertpercaj = $.ajax({
+            url: "http://localhost:3000/fertilitycountyperc",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){
+                fertpercresponse = msg
+            }
+        });
+        
+        var pregresponse;
+        var pregaj = $.ajax({
+            url: "http://localhost:3000/pregnantcounty",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){
+                pregresponse = msg
+            }
+        });
+        
+        var abortresponse;
+        var abortaj = $.ajax({
+            url: "http://localhost:3000/abortions",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){
+                abortresponse = msg
+            }
+        });
+        
+        var abortpercresponse;
+        var abortpercaj = $.ajax({
+            url: "http://localhost:3000/abortionsperc",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){
+                abortpercresponse = msg
+            }
+        });
+        
+        var expectresponse;
+        var expectaj = $.ajax({
+            url: "http://localhost:3000/lifeexpectancy",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){
+                expectresponse = msg
+            }
+        });
+        
+        var expectmaleresponse;
+        var expectmaleaj = $.ajax({
+            url: "http://localhost:3000/lifeexpectancymale",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){
+                expectmaleresponse = msg
+            }
+        });
+        
+        var expectfemaleresponse;
+        var expectfemaleaj = $.ajax({
+            url: "http://localhost:3000/lifeexpectancyfemale",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){
+                expectfemaleresponse = msg
+            }
+        });
+    </script>
+    <div class="row">
+        <div class="col s12 m6 l6">
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Statistici ale judetului {{ county | title }}
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6 m4 l4 offset-s3 offset-m4 offset-l4">
+                                <select id="year">
+                                
+                                </select>
+                                <label for="year">An</label>
+                            </div>
+                        </div>
+                        <script>
+                            function update(year){
+                                var result = $.grep(popresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
+                                $("#nrpop").html(result[0] ? result[0]["{{county}}"] : "-");
+                                
+                                var result = $.grep(natresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
+                                $("#natalit").html(result[0]? result[0]["{{county}}"] : "-");
+                                
+                                var result = $.grep(natpercresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
+                                $("#natalitperc").html(result[0]  ? result[0]["{{county}}"] + "‰" : "-");
+                                
+                                var result = $.grep(fertpercresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
+                                $("#fertperc").html(result[0] ? result[0]["{{county}}"] + "‰" : "-");
+                                
+                                var result = $.grep(pregresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
+                                $("#preg").html(result[0]  ? result[0]["{{county}}"] : "-");
+                                
+                                var result = $.grep(abortresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
+                                $("#aborts").html(result[0] ? result[0]["{{county}}"] : "-");
+                                
+                                var result = $.grep(abortpercresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
+                                $("#abortsperc").html(result[0]  ? result[0]["{{county}}"] + "‰" : "-");
+                                
+                                var result = $.grep(expectresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
+                                $("#expect").html(result[0] ? result[0]["{{county}}"] + " ani" : "-");
+                                
+                                var result = $.grep(expectmaleresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
+                                $("#expect-male").html(result[0]  ? result[0]["{{county}}"] + " ani" : "-");
+                                
+                                var result = $.grep(expectfemaleresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
+                                $("#expect-female").html(result[0] ? result[0]["{{county}}"] + " ani" : "-");
+                            }
+                            
+                            $.when(nataj, popaj, natpercaj, fertpercaj, pregaj, abortaj, abortpercaj, expectaj, expectmaleaj, expectfemaleaj).done(function(){
+                                $.each(natresponse, function(i, el){
+                                    $("#year").append("<option>" + el["year"] + "</option>");
+                                });
+                                $("#year").children().last().attr("selected", "selected");
+                                $("#year").material_select();
+                                $("#year").on("change", function(){
+                                    update($(this).find(":selected").text());
+                                });
+                            });
+                        </script>
+                        <div class="row">
+                            <p>
+                                <b>Nr. locuitori:</b>
+                                <span style="float: right"id="nrpop">-</span>
+                            </p>
+                            <p>
+                                <b>Nou nascutii:</b>
+                                <span style="float: right" id="natalit">-</span>
+                            </p>
+                            <p>
+                                <b>Natalitate:</b>
+                                <span style="float: right" id="natalitperc">-</span>
+                            </p>
+                            <p>
+                                <b>Fertilitate:</b>
+                                <span style="float: right" id="fertperc">-</span>
+                            </p>
+                            <p>
+                                <b>Gravide luate in evidenta:</b>
+                                <span style="float: right" id="preg">-</span>
+                            </p>
+                            <p>
+                                <b>Avorturi:</b>
+                                <span style="float: right" id="aborts">-</span>
+                            </p>
+                            <p>
+                                <b>Rata de avort:</b>
+                                <span style="float: right" id="abortsperc">-</span>
+                            </p>
+                            <p>
+                                <b>Durata medie de viata:</b>
+                                <span style="float: right" id="expect">-</span>
+                            </p>
+                            <p>
+                                <b style="margin-left:20px;">-femei</b>
+                                <span style="float: right" id="expect-female">-</span>
+                            </p>
+                            <p>
+                                <b style="margin-left:20px;">-barbati</b>
+                                <span style="float: right" id="expect-male">-</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Evolutia natalitati in judetul {{ county | title }} in timp
+                        </div>
+                        <center>
+                            <div id="natalitgraph"></div>
+                        </center>
+                        <script>
+    
+                            $.when(nataj).done(function(){
+                                chart = anychart.area();
+    
+                                var totaldata = [];
+    
+                                $.each(natresponse, function(i, el){
+                                    totaldata.push([el["year"], el["{{ county }}"]]);
+                                });
+    
+                                total = chart.area(totaldata);
+                                total.name("Nou nascutii");
+                                total.color("#1be2b1");
+                                total.zIndex(2.0001);
+    
+                                var legend = chart.legend();
+                                legend.enabled(true);
+                                chart.container("natalitgraph");
+                                chart.draw();
+                            });
+    
+                        </script>
+                        <style>
+                            #natalitgraph {
+                                height: 400px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Evolutia fertilitati (nr nou nascuti la 1000 de femei 16-49) in judetul {{ county | title }} in timp
+                        </div>
+                        <center>
+                            <div id="fertpercgraph"></div>
+                        </center>
+                        <script>
+    
+                            $.when(fertpercaj).done(function(){
+                                chart = anychart.area();
+    
+                                var totaldata = [];
+    
+                                $.each(fertpercresponse, function(i, el){
+                                    totaldata.push([el["year"], el["{{ county }}"]]);
+                                });
+    
+                                total = chart.area(totaldata);
+                                total.name("Rata fertilitati");
+                                total.color("#dd4285");
+                                total.zIndex(2.0001);
+    
+                                var legend = chart.legend();
+                                legend.enabled(true);
+                                chart.container("fertpercgraph");
+                                chart.draw();
+                            });
+    
+                        </script>
+                        <style>
+                            #fertpercgraph {
+                                height: 400px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Evolutia numarului de avorturi in judetul {{ county | title }} in timp
+                        </div>
+                        <center>
+                            <div id="abortgraph"></div>
+                        </center>
+                        <script>
+    
+                            $.when(abortaj).done(function(){
+                                chart = anychart.area();
+    
+                                var totaldata = [];
+    
+                                $.each(abortresponse, function(i, el){
+                                    totaldata.push([el["year"], el["{{ county }}"]]);
+                                });
+    
+                                total = chart.area(totaldata);
+                                total.name("Nr avorturi");
+                                total.color("#2d191d");
+                                total.zIndex(2.0001);
+    
+                                var legend = chart.legend();
+                                legend.enabled(true);
+                                chart.container("abortgraph");
+                                chart.draw();
+                            });
+    
+                        </script>
+                        <style>
+                            #abortgraph {
+                                height: 400px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l6">
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Evolutia populatiei in judetul {{ county | title }} in timp
+                        </div>
+                        <center>
+                            <div id="countygraph"></div>
+                        </center>
+                        <script>
+    
+                            $.when(popaj).done(function(){
+                                chart = anychart.area();
+    
+                                var totaldata = [];
+    
+                                $.each(popresponse, function(i, el){
+                                    totaldata.push([el["year"], el["{{ county }}"]]);
+                                });
+    
+                                total = chart.area(totaldata);
+                                total.name("Locuitori");
+                                total.color("#4286f4");
+                                total.zIndex(2.0001);
+    
+                                var legend = chart.legend();
+                                legend.enabled(true);
+                                chart.container("countygraph");
+                                chart.draw();
+                            });
+    
+                        </script>
+                        <style>
+                            #countygraph {
+                                height: 270px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Evolutia ratei natalitati (nr nou nascuti la 1000 de locuitori) in judetul {{ county | title }} in timp
+                        </div>
+                        <center>
+                            <div id="natalitpercgraph"></div>
+                        </center>
+                        <script>
+    
+                            $.when(natpercaj).done(function(){
+                                chart = anychart.area();
+    
+                                var totaldata = [];
+    
+                                $.each(natpercresponse, function(i, el){
+                                    totaldata.push([el["year"], el["{{ county }}"]]);
+                                });
+    
+                                total = chart.area(totaldata);
+                                total.name("Rata natalitati");
+                                total.color("#cbdd42");
+                                total.zIndex(2.0001);
+    
+                                var legend = chart.legend();
+                                legend.enabled(true);
+                                chart.container("natalitpercgraph");
+                                chart.draw();
+                            });
+    
+                        </script>
+                        <style>
+                            #natalitpercgraph {
+                                height: 400px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Evolutia numarului de gravide inregistrate in fiecare an in judetul {{ county | title }} in timp
+                        </div>
+                        <center>
+                            <div id="preggraph"></div>
+                        </center>
+                        <script>
+    
+                            $.when(pregaj).done(function(){
+                                chart = anychart.area();
+    
+                                var totaldata = [];
+    
+                                $.each(pregresponse, function(i, el){
+                                    totaldata.push([el["year"], el["{{ county }}"]]);
+                                });
+    
+                                total = chart.area(totaldata);
+                                total.name("Nr gravide");
+                                total.color("#ce082f");
+                                total.zIndex(2.0001);
+    
+                                var legend = chart.legend();
+                                legend.enabled(true);
+                                chart.container("preggraph");
+                                chart.draw();
+                            });
+    
+                        </script>
+                        <style>
+                            #preggraph {
+                                height: 400px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Evolutia ratei de avort in judetul {{ county | title }} in timp
+                        </div>
+                        <center>
+                            <div id="abortpercgraph"></div>
+                        </center>
+                        <script>
+    
+                            $.when(abortpercaj).done(function(){
+                                chart = anychart.area();
+    
+                                var totaldata = [];
+    
+                                $.each(abortpercresponse, function(i, el){
+                                    totaldata.push([el["year"], el["{{ county }}"]]);
+                                });
+    
+                                total = chart.area(totaldata);
+                                total.name("Rata avort");
+                                total.color("#050203");
+                                total.zIndex(2.0001);
+    
+                                var legend = chart.legend();
+                                legend.enabled(true);
+                                chart.container("abortpercgraph");
+                                chart.draw();
+                            });
+    
+                        </script>
+                        <style>
+                            #abortpercgraph {
+                                height: 400px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m12 l12">
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Evolutia duratei medie de viata in judetul {{ county | title }} in timp
+                        </div>
+                        <center>
+                            <div id="expectgraph"></div>
+                        </center>
+                        <script>
+    
+                            $.when(expectaj, expectmaleaj, expectfemaleaj).done(function(){
+                                chart = anychart.area();
+    
+                                var totaldata = [];
+                                var totalmaledata = [];
+                                var totalfemaledata = [];
+    
+                                $.each(expectresponse, function(i, el){
+                                    totaldata.push([el["year"], el["{{ county }}"]]);
+                                });
+                                $.each(expectmaleresponse, function(i, el){
+                                    totalmaledata.push([el["year"], el["{{ county }}"]]);
+                                });
+                                $.each(expectfemaleresponse, function(i, el){
+                                    totalfemaledata.push([el["year"], el["{{ county }}"]]);
+                                });
+    
+                                total = chart.area(totaldata);
+                                total.name("Medie");
+                                total.color("#3abc6c");
+                                total.zIndex(2.0001);
+                                
+                                
+                                male = chart.area(totalmaledata);
+                                male.name("Barbati");
+                                male.color("#4583e0");
+                                male.zIndex(3.0001);
+                                
+                                
+                                female = chart.area(totalfemaledata);
+                                female.name("Femei");
+                                female.color("#d61b59");
+                                female.zIndex(1.0001);
+    
+                                var legend = chart.legend();
+                                legend.enabled(true);
+                                chart.container("expectgraph");
+                                chart.draw();
+                            });
+    
+                        </script>
+                        <style>
+                            #expectgraph {
+                                height: 400px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
