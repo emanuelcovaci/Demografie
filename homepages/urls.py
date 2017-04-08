@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^demografia', views.demografia, name='demografia'),
     url(r'^tranzitia', views.tranzitia, name='tranzitia'),
     url(r'^istoric', views.istoric, name='istoric'),
-    url(r'^dash', views.dash, name='dash'),
+    url(r'^statistics', views.dash, name='dash'),
 ]

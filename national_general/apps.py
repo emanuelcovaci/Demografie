@@ -3,5 +3,5 @@ from __future__ import unicode_literals
 from django.apps import AppConfig
 
 
-class PopulationConfig(AppConfig):
-    name = 'population'
+class NationalGeneralConfig(AppConfig):
+    name = 'national_general'

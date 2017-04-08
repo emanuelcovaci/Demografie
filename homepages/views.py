@@ -19,6 +19,5 @@ def tranzitia(request):
 def istoric(request):
     return render(request,'homepages/istoric.html')
 
-
 def dash(request):
     return render(request,'common/base.html')
