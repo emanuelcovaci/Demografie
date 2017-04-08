@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^statistics/agegroup/$', views.agegroup, name='agegroup'),
     url(r'^statistics/general/natality/$', views.natality, name='natality'),
     url(r'^statistics/general/fertility/$', views.fertility, name='fertility'),
+    url(r'^statistics/general/aborts/$', views.aborts, name='aborts'),
 ]
