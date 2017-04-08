@@ -23,7 +23,7 @@
    <style>
      #linefill {
 
-      max-height: 500px;
+      height: 400px;
       margin: 0;
       padding: 0;
     }
@@ -163,6 +163,8 @@ anychart.onDocumentReady(function() {
 
    // Sets Z-Index of the orange area series.
    orangeArea.zIndex(30.0001);
+   var legend = chart.legend();
+   legend.enabled(true);
 
    chart.container("linefill");
    chart.draw();
