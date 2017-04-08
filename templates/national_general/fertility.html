@@ -55,10 +55,10 @@
               <div class="card">
                 <div class="card-content">
                     <div class="card-title center-align">
-                        Evolutia numarului de nou nascuti
+                        Evolutia fertilitati (numarul de copii nascuti vii la 1000 de femei 15-49 ani)
                     </div>
                     <center>
-                        <div id="newborn"></div>
+                        <div id="fertility"></div>
                     </center>
                     <script>
 
@@ -68,23 +68,23 @@
                             var totaldata = [];
 
                             $.each(response, function(i, el){
-                                totaldata.push([el["year"], el["bornalive"]]);
+                                totaldata.push([el["year"], el["fertilityperc"]]);
                             });
 
                             total = chart.area(totaldata);
-                            total.name("Nou nascuti");
+                            total.name("Fertilitatea");
                             total.color("#5140f7");
                             total.zIndex(2.0001);
 
                             var legend = chart.legend();
                             legend.enabled(true);
-                            chart.container("newborn");
+                            chart.container("fertility");
                             chart.draw();
                         });
 
                     </script>
                     <style>
-                        #newborn {
+                        #fertility {
                             height: 300px;
                             margin: 0;
                             padding: 0;
@@ -96,10 +96,10 @@
               <div class="card">
                 <div class="card-content">
                     <div class="card-title center-align">
-                        Evolutia natalitatii (numarul de nou nascuti la 100 de locuitori)
+                        Evolutia numarului de gravide luate in evidenta
                     </div>
                     <center>
-                        <div id="natality"></div>
+                        <div id="pregnant"></div>
                     </center>
                     <script>
 
@@ -110,23 +110,23 @@
                             var senioridata = [];
 
                             $.each(response, function(i, el){
-                                minoridata.push([el["year"], el["bornaliveperc"]]);
+                                minoridata.push([el["year"], el["pregnant"]]);
                             });
 
                             minori = chart.area(minoridata);
-                            minori.name("Natalitate");
+                            minori.name("Nr. gravide");
                             minori.color("#fc23f1");
                             minori.zIndex(30.0001);
 
                             var legend = chart.legend();
                             legend.enabled(true);
-                            chart.container("natality");
+                            chart.container("pregnant");
                             chart.draw();
                         });
 
                     </script>
                     <style>
-                        #natality {
+                        #pregnant {
                             height: 300px;
                             margin: 0;
                             padding: 0;
