@@ -10,7 +10,7 @@
             timeout: 30000,
             error: function(){
             },
-            success: function(msg){ 
+            success: function(msg){
                 response = msg
             }
         });
@@ -27,17 +27,17 @@
                             <div id="pop"></div>
                         </center>
                         <script>
-                
+
                             $.when(aj).done(function(){
                                 chart = anychart.area();
-                    
+
                                 var data = [];
-                            
+
                                 $.each(response, function(i, el){
                                     data.push([el["year"], el["totalpop"]]);
                                 });
                                 pop = chart.area(data);
-                                
+
                                 // Sets Z-Index of the orange area series.
                                 pop.zIndex(30.0001);
                                 pop.name("Numar locuitori");
@@ -46,7 +46,7 @@
                                 chart.container("pop");
                                 chart.draw();
                             });
-                    
+
                         </script>
                         <style>
                             #pop {
@@ -54,6 +54,13 @@
                                 margin: 0;
                                 padding: 0;
                             }
+                            @media only screen and (max-width: 599px){
+                                #pop {
+                                    height: 230px !important;
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                              }
                         </style>
                     </div>
                 </div>
@@ -68,14 +75,14 @@
                         <div class="card-title center-align">
                             Informatii generale. Poulatia
                         </div>
-                        <p><a href="https://ro.wikipedia.org/wiki/Demografie">Demografia</a> este studiul dinamicii 
-                        populaţiilor umane. Ea cuprinde studiul mărimii, structurii şi distribuţiei populaţiei, precum 
-                        şi modul în care o populaţie se modifică în timp în urma naşterilor, deceselor, migraţiei şi 
-                        îmbătrânirii. Analiza demografică se poate referi la societăţi întregi sau la grupuri definite 
+                        <p><a href="https://ro.wikipedia.org/wiki/Demografie">Demografia</a> este studiul dinamicii
+                        populaţiilor umane. Ea cuprinde studiul mărimii, structurii şi distribuţiei populaţiei, precum
+                        şi modul în care o populaţie se modifică în timp în urma naşterilor, deceselor, migraţiei şi
+                        îmbătrânirii. Analiza demografică se poate referi la societăţi întregi sau la grupuri definite
                         după diferite criterii: nivel de educaţie, naţionalitate, religie, etc.</p>
                         <br>
-                        <p>In urma studiilor efectuate, Romania aveain anul 2015 a populatie de aproximativ 19870647 de 
-                        locuitori şi este de aşteptat ca în următorii ani să se înregistreze o scădere lentă a populaţiei 
+                        <p>In urma studiilor efectuate, Romania aveain anul 2015 a populatie de aproximativ 19870647 de
+                        locuitori şi este de aşteptat ca în următorii ani să se înregistreze o scădere lentă a populaţiei
                         ca urmare a sporului natural negativ. </p>
                     </div>
                 </div>
@@ -120,18 +127,18 @@
                         <div id="urban"></div>
                     </center>
                     <script>
-                
+
                         $.when(aj).done(function(){
                             chart = anychart.area();
-                    
+
                             var urbandata = [];
                             var ruraldata = [];
-                            
+
                             $.each(response, function(i, el){
                                 urbandata.push([el["year"], el["urbanpop"]]);
                                 ruraldata.push([el["year"], el["ruralpop"]]);
                             });
-                            
+
                             urban = chart.area(urbandata);
                             urban.name("Urban");
                             urban.color("#837eb2");
@@ -139,13 +146,13 @@
                             rural = chart.area(ruraldata);
                             rural.name("Rural");
                             rural.color("#1d9939");
-                            
+
                             var legend = chart.legend();
                             legend.enabled(true);
                             chart.container("urban");
                             chart.draw();
                         });
-                
+
                     </script>
                     <style>
                         #urban {
@@ -153,6 +160,13 @@
                             margin: 0;
                             padding: 0;
                         }
+                        @media only screen and (max-width: 599px){
+                            #urban {
+                                height: 300px !important;
+                                margin: 0;
+                                padding: 0;
+                            }
+                          }
                     </style>
                 </div>
             </div>
@@ -166,18 +180,18 @@
                         <div id="sex"></div>
                     </center>
                     <script>
-                
+
                         $.when(aj).done(function(){
                             chart = anychart.area();
-                    
+
                             var maledata = [];
                             var femaledata = [];
-                            
+
                             $.each(response, function(i, el){
                                 maledata.push([el["year"], el["malepop"]]);
                                 femaledata.push([el["year"], el["femalepop"]]);
                             });
-                            
+
                             male = chart.area(maledata);
                             male.name("Male");
                             male.color("#2d6fd8");
@@ -185,13 +199,13 @@
                             female = chart.area(femaledata);
                             female.name("Female");
                             female.color("#d81ab5");
-                            
+
                             var legend = chart.legend();
                             legend.enabled(true);
                             chart.container("sex");
                             chart.draw();
                         });
-                
+
                     </script>
                     <style>
                         #sex {
@@ -199,6 +213,13 @@
                             margin: 0;
                             padding: 0;
                         }
+                        @media only screen and (max-width: 599px){
+                            #sex {
+                                height: 300px !important;
+                                margin: 0;
+                                padding: 0;
+                            }
+                          }
                     </style>
                 </div>
             </div>

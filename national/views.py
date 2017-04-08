@@ -3,20 +3,20 @@ from pythonic.utility import add_dash_entry, DASH_ENTRIES, generate_list
 from django.urls.base import reverse_lazy
 # Create your views here.
 
-add_dash_entry("national", "Nivel National", '')
-add_dash_entry("general", "Informatii Generale", 'general', parent='national')
-add_dash_entry("agegroup", "Varsta Poulatiei", 'agegroup', parent='national')
-add_dash_entry("phenomena", "Fenomene Demografice", '', parent='national')
-add_dash_entry("natality", "Natalitate", 'natality', parent='national/phenomena')
-add_dash_entry("fertility", "Fertilitate", 'fertility', parent='national/phenomena')
-add_dash_entry("aborts", "Avorturi", 'aborts', parent='national/phenomena')
-add_dash_entry("deaths", "Decese", '', parent='national/phenomena')
-add_dash_entry("mortality", "Mortalitatea", 'mortality', parent='national/phenomena/deaths')
-add_dash_entry("abortdeaths", "Decese prin avort", 'abortdeaths', parent='national/phenomena/deaths')
-add_dash_entry("infantdeaths", "Decese copii sub 1 an", 'infantdeaths', parent='national/phenomena/deaths')
-add_dash_entry("borndead", "Nascuti morti", 'borndead', parent='national/phenomena/deaths')
-add_dash_entry("naturalincrease", "Sporul natural", 'naturalincrease', parent='national/phenomena')
-add_dash_entry("marriage", "Casatorii/Divorturi", 'marriage', parent='national/phenomena')
+add_dash_entry("national", "Nivel National", '',icon='tune')
+add_dash_entry("general", "Informatii Generale", 'general', parent='national',icon="subdirectory_arrow_right")
+add_dash_entry("agegroup", "Varsta Poulatiei", 'agegroup', parent='national',icon="subdirectory_arrow_right")
+add_dash_entry("phenomena", "Fenomene Demografice", '', parent='national',icon="subdirectory_arrow_right")
+add_dash_entry("natality", "Natalitate", 'natality', parent='national/phenomena',icon='share')
+add_dash_entry("fertility", "Fertilitate", 'fertility', parent='national/phenomena',icon='share')
+add_dash_entry("aborts", "Avorturi", 'aborts', parent='national/phenomena',icon="share")
+add_dash_entry("deaths", "Decese", '', parent='national/phenomena',icon='share')
+add_dash_entry("mortality", "Mortalitatea", 'mortality', parent='national/phenomena/deaths',icon="description")
+add_dash_entry("abortdeaths", "Decese prin avort", 'abortdeaths', parent='national/phenomena/deaths',icon="description")
+add_dash_entry("infantdeaths", "Decese infantile", 'infantdeaths', parent='national/phenomena/deaths',icon="description")
+add_dash_entry("borndead", "Nascuti morti", 'borndead', parent='national/phenomena/deaths',icon="description")
+add_dash_entry("naturalincrease", "Sporul natural", 'naturalincrease', parent='national/phenomena',icon='share')
+add_dash_entry("marriage", "Casatorii/Divorturi", 'marriage', parent='national/phenomena',icon='share')
 
 def general(request):
     request.session['active_entry'] = "national/general"
