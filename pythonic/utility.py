@@ -22,19 +22,19 @@ def add_dash_entry(name, verbose_name, url, icon='label', parent=""):
         "children" : {},
     }
 
-def recursive_entry(entries, depth, active_entries=[]):
+def recursive_entry(entries, depth, active_entries=[], parent_active=False):
     text = ""
     print active_entries
-    for entry in entries["children"].itervalues():
+    for entry in sorted( entries["children"].itervalues(), key=lambda k: k['verbose_name']):
         has_children = len(entry["children"]) > 0
-        if entry_active(entry, active_entries):
+        if entry_active(entry, active_entries) or (not has_children and parent_active and len(active_entries) is 0):
             text += '<li class="active">\
                         <ul class="collapsible collapsible-accordion">\
                             <li>\
                                 <a style="padding-left: 16px;" href="' + (unicode(reverse_lazy(entry["url_name"]) if entry["url_name"] else "#") if not has_children else '#') + '" class="collapsible-header active"><i style="margin-left:' + str(depth * 2) + '0px" class="material-icons">' + entry["icon"] + '</i>' + entry["verbose_name"] + '</a>\
                                 <div class="collapsible-body" style="display:block">\
                                     <ul>' + \
-                                        recursive_entry(entry, depth + 1, active_entries[1:]) + \
+                                        recursive_entry(entry, depth + 1, active_entries[1:], True) + \
                                     '</ul>\
                                 </div>\
                             </li>\
@@ -78,7 +78,7 @@ def generate_list(request):
                         <a href="' + (unicode(reverse_lazy(entry["url_name"]) if entry["url_name"] else "#") if not has_children else '#') + '" class="collapsible-header active"><i class="material-icons">' + entry["icon"] + '</i>' + entry["verbose_name"] + '</a>\
                         <div class="collapsible-body" style="display:block">\
                             <ul>' + \
-                                recursive_entry(entry, 1, active_entries[1:]) + \
+                                recursive_entry(entry, 1, active_entries[1:], True) + \
                             '</ul>\
                         </div>\
                     </li>'

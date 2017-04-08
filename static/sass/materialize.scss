@@ -85,5 +85,9 @@ body {
 }
 
 .side-nav .collapsible-header.active:hover{
-  background-color: $primary-color-dark;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.side-nav .collapsible li.active{
+  background-color: $primary-color;
 }

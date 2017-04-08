@@ -93,7 +93,7 @@
     }
 }
 
-.collapsible-body > ul:not(.active) > li:not(.active) a{
+.collapsible-body > ul:not(.active) > li:not(.active) a:not(.active){
     color: #000 !important;
 } 
 

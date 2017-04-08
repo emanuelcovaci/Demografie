@@ -6,6 +6,8 @@ from django.urls.base import reverse_lazy
 add_dash_entry("national", "Nivel National", '')
 add_dash_entry("general", "Informatii Generale", 'general', parent='national')
 add_dash_entry("agegroup", "Varsta Poulatiei", 'agegroup', parent='national')
+add_dash_entry("phenomena", "Fenomene Demografice", '', parent='national')
+add_dash_entry("natality", "Natalitate", 'natality', parent='national/phenomena')
 
 def general(request):
     print DASH_ENTRIES
@@ -23,7 +25,19 @@ def agegroup(request):
     request.session['active_entry'] = "national/agegroup"
     context = {
         'breadcrumbs': [
-                {"name": "Varsta Populatiei", "url_name": 'general'},        
+                {"name": "Varsta Populatiei", "url_name": 'agegroup'},        
+            ],
+        'list': generate_list(request),
+    }
+    return render(request,'national_general/agegroup.html', context)
+
+
+def natality(request):
+    print DASH_ENTRIES
+    request.session['active_entry'] = "national/phenomena/natality"
+    context = {
+        'breadcrumbs': [
+                {"name": "Natalitate", "url_name": 'natality'},        
             ],
         'list': generate_list(request),
     }

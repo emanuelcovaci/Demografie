@@ -1,0 +1,181 @@
+{% extends "common/base.html" %}
+{% block content %}
+    <script>
+        var response1;
+        var aj1 = $.ajax({
+            url: "http://localhost:3000/agegrouppop",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){
+                response1 = msg
+            }
+        });
+        var response2;
+        var aj2 = $.ajax({
+            url: "http://localhost:3000/agegroupperc",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){
+                response2 = msg
+            }
+        });
+    </script>
+    <div class="row">
+        <div class="col s12 m6 l6">
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Vastra populatiei. Grupe de vastra
+                        </div>
+                        <p>
+                          Fenomenul cel mai puţin plăcut pentru România este declinul demografic.Este foarte greu să ajungem să echilibrăm nişte dezechilibre majore care au apărut în cei 25 de ani la nivelul populaţiei. Este foarte greu să ajungi ca într-o perioadă rezonabilă să vii şi să echilibrezi structurile pe vârste. Problema mare a României nu este că am ajuns de la 23.200.000 în 1990 la 19.800.000 pe populaţia rezidentă. Problema majoră este că s-a schimbat radical structura populaţiei pe vârste. Aceasta este problema pe care o vom duce probabil în următorii 20-30 de ani şi, dacă vom merge pe scenariile pesimiste, probabil că vom ajunge la 14-15.000.000 într-o perioadă de 30-40 de ani.
+                            <a href="http://www.economica.net/romania-a-intrat-in-iarna-demografica-populatia-s-a-redus-in-fiecare-zi-din-2016-cu-247-de-persoane_122391.html">Citeste mai mult </a>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Vastra Populatiei. Procente
+                        </div>
+                        <p>
+                            In ultimul an s-a accentuat procesul de imbatranire a populatiei. A scazut numarul romanilor sub 14 ani si a crescut numarul celor peste 65, astfel incat s-a ajuns, de la 106,5 batrani la 100 de tineri si copii la aproape 110 batrani la 100 de tineri si copii.
+                        </p>
+
+                        <br>
+                        <p>
+                          Ponderea persoanelor varstnice in totalul populatiei Romaniei a crescut de la 16,5% in 2014 la 17,0% la 1 ianuarie 2015. Ca urmare, indicele de dependenta demografica (raportul dintre numarul adultilor si cel al copiilor, tineri si pensionarilor) a crescut in anul care a trecut de la 47,1 la 48,1 persoane tinere si varstnice la 100 persoane adulte.
+                            <a href="http://stirileprotv.ro/stiri/stirileprotv-special/cat-de-mult-a-scazut-si-a-imbatranit-populatia-romaniei-in-ultimul-an-47-cea-mai-comuna-varsta.html">Citeste mai mult </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l6">
+            <div class="row">
+              <div class="card">
+                <div class="card-content">
+                    <div class="card-title center-align">
+                        Evolutia populatiei pe grupe de varsta
+                    </div>
+                    <center>
+                        <div id="agepop"></div>
+                    </center>
+                    <script>
+
+                        $.when(aj1).done(function(){
+                            chart = anychart.area();
+
+                            var totaldata = [];
+                            var minoridata = [];
+                            var majoridata = [];
+                            var senioridata = [];
+
+                            $.each(response1, function(i, el){
+                                totaldata.push([el["year"], el["total"]]);
+                                minoridata.push([el["year"], el["age0_4"] + el["age5_9"] + el["age10_14"] + el["age15_19"]]);
+                                majoridata.push([el["year"], el["age20_24"] + el["age25_29"] + el["age30_34"] + el["age35_39"] + el["age40_44"] + el["age45_49"] + el["age50_54"] + el["age55_59"] + el["age60_64"]]);
+                                senioridata.push([el["year"], el["age65_69"] + el["age70_74"] + el["age75_79"] + el["age80_84"] + el["age85"]]);
+                            });
+
+                            total = chart.area(totaldata);
+                            total.name("Total");
+                            total.color("#5140f7");
+                            total.zIndex(2.0001);
+                            minori = chart.area(minoridata);
+                            minori.name("Minori");
+                            minori.color("#fc23f1");
+                            minori.zIndex(30.0001);
+                            majori = chart.area(majoridata);
+                            majori.name("Adulti");
+                            majori.color("#ba9510");
+                            majori.zIndex(5.0001);
+                            seniori = chart.area(senioridata);
+                            seniori.name("Pensionari");
+                            seniori.color("#990000");
+                            seniori.zIndex(40.0001);
+
+                            var legend = chart.legend();
+                            legend.enabled(true);
+                            chart.container("agepop");
+                            chart.draw();
+                        });
+
+                    </script>
+                    <style>
+                        #agepop {
+                            height: 300px;
+                            margin: 0;
+                            padding: 0;
+                        }
+                    </style>
+                </div>
+            </div>
+            <div class="row">
+              <div class="card">
+                <div class="card-content">
+                    <div class="card-title center-align">
+                        Evolutia populatiei pe grupe de varsta ca procente.
+                    </div>
+                    <center>
+                        <div id="ageperc"></div>
+                    </center>
+                    <script>
+
+                        $.when(aj2).done(function(){
+                            chart = anychart.area();
+                            console.log(response2);
+                            var minoridata = [];
+                            var majoridata = [];
+                            var senioridata = [];
+
+                            $.each(response2, function(i, el){
+                                minoridata.push([el["year"], el["age0_4"] + el["age5_9"] + el["age10_14"] + el["age15_19"]]);
+                                majoridata.push([el["year"], el["age20_24"] + el["age25_29"] + el["age30_34"] + el["age35_39"] + el["age40_44"] + el["age45_49"] + el["age50_54"] + el["age55_59"] + el["age60_64"]]);
+                                senioridata.push([el["year"], el["age65_69"] + el["age70_74"] + el["age75_79"] + el["age80_84"] + el["age85"]]);
+                            });
+
+                            minori = chart.area(minoridata);
+                            minori.name("Minori");
+                            minori.color("#fc23f1");
+                            minori.zIndex(30.0001);
+                            majori = chart.area(majoridata);
+                            majori.name("Adulti");
+                            majori.color("#ba9510");
+                            majori.zIndex(5.0001);
+                            seniori = chart.area(senioridata);
+                            seniori.name("Pensionari");
+                            seniori.color("#990000");
+                            seniori.zIndex(40.0001);
+
+                            var legend = chart.legend();
+                            legend.enabled(true);
+                            chart.container("ageperc");
+                            chart.draw();
+                        });
+
+                    </script>
+                    <style>
+                        #ageperc {
+                            height: 300px;
+                            margin: 0;
+                            padding: 0;
+                        }
+                    </style>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

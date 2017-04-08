@@ -6613,6 +6613,9 @@ body {
   color: #fff; }
 
 .side-nav .collapsible-header.active:hover {
-  background-color: #186860; }
+  background-color: rgba(0, 0, 0, 0.05); }
+
+.side-nav .collapsible li.active {
+  background-color: #26a69a; }
 
 /*# sourceMappingURL=../../../../../../static/sass/materialize.css.map */
