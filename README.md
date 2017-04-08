@@ -2,7 +2,7 @@
 
 # Demografia Romaniei 
 
-####  Acest proiect are ca scop procesarea statisticilor puse la dispozitie de guvernul romaniai cu privire la demografie si prezentarea acestoara intr-un mod placut si interactiv
+####  Acest proiect are ca scop procesarea statisticilor puse la dispozitie de Guvernul Romaniei cu privire la demografie si prezentarea acestoara intr-un mod placut si interactiv
 
 ## Deploy
 * Pentru a rula proiectul trebuie sa urmariti acesti pasi
