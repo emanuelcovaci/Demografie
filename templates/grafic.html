@@ -1,77 +1,159 @@
-<!DOCTYPE html>
-<html>
-<head>
-  {% load staticfiles %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://code.highcharts.com/highcharts.src.js"></script>
-<script src="{% static "js/jquery.highchartTable.js" type="text/javascript" %}"></script>
+{% extends "base_main.html" %}
+{% load staticfiles sass_tags %}
+{% block content %}
 
+   <style>
+      #container  {
+
+        height:300px;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+    <style>
+      #piechart {
+
+       height: 400px;
+       margin: 0;
+       padding: 0;
+     }
+   </style>
+
+   <style>
+     #linefill {
+
+      max-height: 500px;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
 </head>
-<body>
-
-<!-- <div style="width:100px;">
-<table class="highchart" data-graph-container-before="1" data-graph-type="column" hidden="hidden">
-  <thead>
-      <tr>
-          <th>Month</th>
-          <th>Sales</th>
-      </tr>
-   </thead>
-   <tbody>
-      <tr>
-          <td>January</td>
-          <td>8000</td>
-      </tr>
-      <tr>
-          <td>February</td>
-          <td>12000</td>
-      </tr>
-
-         <tr>
-          <td>MArtie</td>
-          <td>12000</td>
-      </tr>
-
-  </tbody>
-</table>
-</div> -->
-
-<table class="highchart"
-  data-graph-container="highchart-container"
-  data-graph-type="line">
-  <caption>Column example</caption>
-  <thead>
-    <tr>
-      <th>Month</th>
-      <th>Sales</th>
-      <th>Benefits</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>January</td>
-      <td>8000</td>
-      <td>2000</td>
-    </tr>
-
-
-  </tbody>
-</table>
 
 
 
 
-        <!-- <script>
-        $(document).ready(function() {
-  $('table.highchart').highchartTable();
+  <div class="container" style="margin-top: 15px;">
+    <div class="row">
+      <div class="col s12 m10 l10 offset-m1 offset-l1">
+        <div class="card">
+            <div class="card-content">
+
+                  <center>
+                   <div id="container"></div>
+                 </center>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="container" style="margin-top: 15px;">
+    <div class="row">
+      <div class="col s12 m10 l10 offset-m1 offset-l1">
+        <div class="card">
+            <div class="card-content">
+
+                  <center>
+                   <div id="piechart"></div>
+                 </center>
+             </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="container" style="margin-top: 15px;">
+      <div class="row">
+        <div class="col s12 m10 l10 offset-m1 offset-l1">
+          <div class="card">
+              <div class="card-content">
+
+                    <center>
+                     <div id="linefill"></div>
+                   </center>
+              </div>
+         </div>
+       </div>
+      </div>
+    </div>
+
+
+
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static 'js/materialize.js'%}"></script>
+  <script src="{% static 'js/init.js'%}"></script>
+
+  <script>
+
+anychart.onDocumentReady(function () {
+   // Creates Pie chart.
+   chart = anychart.pie([12, 2, 1.4]);
+
+   chart.title("Create a Pie chart");
+   chart.container("container");
+   chart.draw();
 });
-        </script> -->
 
-        <script>
-        $(document).ready(function() {
-  $('table.highchart').highchartTable();
+   </script>
+
+   <script>
+
+anychart.onDocumentReady(function () {
+   chart = anychart.column();
+
+   chart.data([
+       ["Apples", 21, 99, 19, 72, 94, 71],
+       ["Pears", 41, 7, 71, 10, 27, 79],
+       ["Bananas", 9, 15, 77, 58, 97, 79],
+       ["Grapes", 71, 34, 40, 21, 72, 6],
+       ["Oranges", 6, 29, 11, 46, 19, 49]
+   ]);
+
+   var legend = chart.legend();
+   legend.enabled(true);
+   legend.maxWidth("20%");
+
+   // Set items layout.
+   legend.itemsLayout(anychart.enums.LegendLayout.HORIZONTAL_EXPANDABLE);
+
+   var seriesName = ["Florida", "Texas", "Arizona", "Nevada", "Oregon", "Idaho"];
+
+   for (var i = 0; i < chart.getSeriesCount(); i++) {
+       chart.getSeriesAt(i).name(seriesName[i]);
+   }
+
+   chart.title("Set items layout");
+   chart.container("piechart");
+   chart.draw();
 });
-        </script>
 
-</body>
-</html>
+   </script>
+
+   <script>
+
+anychart.onDocumentReady(function() {
+   chart = anychart.area();
+
+   var blueArea = chart.area([4, 20, 8, 17]);
+   var orangeArea = chart.area([6, 3, 15, 9]);
+   var greenArea = chart.area([2, 10, 9, 2]);
+
+   // Sets Z-Index of the orange area series.
+   orangeArea.zIndex(30.0001);
+
+   chart.container("linefill");
+   chart.draw();
+});
+
+   </script>
+
+    {% endblock %}
