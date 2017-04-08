@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'sass_processor',
 
     'homepages',
+    'national_general',
+    
 ]
 
 MIDDLEWARE_CLASSES = [

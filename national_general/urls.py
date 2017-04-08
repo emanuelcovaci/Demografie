@@ -8,5 +8,5 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^statistics/general$', views.general, name='general'),
+    url(r'^statistics/general/$', views.general, name='general'),
 ]

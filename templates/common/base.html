@@ -10,6 +10,8 @@
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <link href="{% sass_src 'sass/materialize.scss'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
       <link href="{% static 'css/style.css'%}" type="text/css" rel="stylesheet" media="screen,projection"/>
+      <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="{% static 'js/materialize.js'%}"></script>
     </head>
     
     <body class="dash">        
@@ -17,7 +19,7 @@
           
         <ul id="slide-out" class="side-nav fixed">
             <li>
-                <div class="userView">
+                <div class="userView" style="margin-bottom: 0px;">
                     <div class="background">
                         <img style="width:100%; height:100%;" src="{% static 'img/background-dash.png'%}">
                     </div>
@@ -26,31 +28,48 @@
                     <a href="#!email"><span class="white-text email">presa@ms.ro</span></a>
                 </div>
             </li>
-            {% block list %}
-            {% endblock %}
+            <li class="active">
+                <ul class="collapsible collapsible-accordion">
+                    {% block list %}
+                        {{ list | safe }}
+                    {% endblock %}
+                </ul>
+            </li>
             <li><a href="#!">First Sidebar Link</a></li>
             <li><a href="#!">Second Sidebar Link</a></li>
         </ul>
 
-        <!-- <nav role="navigation">
-          <div class="nav-wrapper">
-            <a data-activates="slide-out" class="button-collapse show-on-" href="#!"><img style="margin-top: 17px; margin-left: 5px;" src="https://res.cloudinary.com/dacg0wegv/image/upload/t_media_lib_thumb/v1463989873/smaller-main-logo_3_bm40iv.gif" /></a>
-    
-            <ul class="right hide-on-med-and-down">
-              <li>
-                <a class='right dropdown-button' href='' data-activates='user_dropdown'><i class=' material-icons'>account_circle</i></a>
-              </li>
-            </ul>
-    
-            <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-          </div>
-        </nav> -->
+        <nav role="navigation">
+            <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Pythonic</a>
+              <ul class="right hide-on-med-and-down">
+                <li><a href="/">Acasa</a></li>
+                 <li><a href="/demografia">Demografia</a></li>
+                <li><a href="/tranzitia">Tranzitia</a></li>
+                <li><a href="/istoric">Istoric</a></li>
+                  <li><a href="/statistics/general">Statistici</a></li>
+                  <li><a href="/contact">Contact</a></li>
+              </ul>
+        
+              <ul id="nav-mobile" class="side-nav">
+                 <li><a href="/">Acasa</a></li>
+                 <li><a href="/demografia">Demografia</a></li>
+                <li><a href="/tranzitia">Tranzitia</a></li>
+                <li><a href="/istoric">Istoric</a></li>
+                   <li><a href="/statistics/general">Statistici</a></li>
+                  <li><a href="/contact">Contact</a></li>
+              </ul>
+              <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            </div>
+          </nav>
     
         <nav>
+          <a href="#" data-activates="slide-out" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
           <div class="nav-wrapper">
-            <a style="margin-left: 20px;" class="breadcrumb" href="#!">Home</a>
+            <a style="margin-left: 20px;" class="breadcrumb" href="/statistics/general">Home</a>
             {% block breadcrumbs %}
-            
+                {% for ist in breadcrumbs %}
+                    <a style="margin-left: 20px;" class="breadcrumb" href="{% url ist.url_name %}">{{ ist.name }}</a>
+                {% endfor %}
             {% endblock %}
             <div style="margin-right: 20px;" id="timestamp" class="right"></div>
           </div>
@@ -89,6 +108,17 @@
           </div>
         </div>
       </footer>
+      <script>
+        $(".button-collapse").sideNav();
+        $(window).on("load", function(){
+            $(".collapsible").collapsible({accordion: true});
+            $(".collapsible-body").each(function(i, el){
+                if($(el).find(".active").length > 0){
+                    $(el.parentElement.parentElement).collapsible('open', $(el.parentElement).index());
+                }
+            });
+        });
+      </script>
     </body>
     
 </html>

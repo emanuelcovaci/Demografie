@@ -78,3 +78,12 @@
 body {
   background-color: $background-color;
 }
+
+.side-nav .collapsible-header.active{
+  background-color: $primary-color;
+  color: #fff;
+}
+
+.side-nav .collapsible-header.active:hover{
+  background-color: $primary-color-dark;
+}
