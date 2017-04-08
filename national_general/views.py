@@ -8,6 +8,7 @@ add_dash_entry("general", "Informatii Generale", 'general', parent='national')
 add_dash_entry("agegroup", "Varsta Poulatiei", 'agegroup', parent='national')
 add_dash_entry("phenomena", "Fenomene Demografice", '', parent='national')
 add_dash_entry("natality", "Natalitate", 'natality', parent='national/phenomena')
+add_dash_entry("fertility", "Fertilitate", 'fertility', parent='national/phenomena')
 
 def general(request):
     print DASH_ENTRIES
@@ -42,3 +43,15 @@ def natality(request):
         'list': generate_list(request),
     }
     return render(request,'national_general/natality.html', context)
+
+
+def fertility(request):
+    print DASH_ENTRIES
+    request.session['active_entry'] = "national/phenomena/fertility"
+    context = {
+        'breadcrumbs': [
+                {"name": "Fertilitate", "url_name": 'fertility'},        
+            ],
+        'list': generate_list(request),
+    }
+    return render(request,'national_general/fertility.html', context)

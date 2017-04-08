@@ -120,7 +120,7 @@ După 1989, numărul nou-născuţilor din România a scăzut dramatic. Astfel, d
                             var senioridata = [];
 
                             $.each(response, function(i, el){
-                                minoridata.push([el["bornaliveperc"]]);
+                                minoridata.push([el["year"], el["bornaliveperc"]]);
                             });
 
                             minori = chart.area(minoridata);
