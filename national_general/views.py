@@ -11,7 +11,6 @@ add_dash_entry("natality", "Natalitate", 'natality', parent='national/phenomena'
 add_dash_entry("fertility", "Fertilitate", 'fertility', parent='national/phenomena')
 
 def general(request):
-    print DASH_ENTRIES
     request.session['active_entry'] = "national/general"
     context = {
         'breadcrumbs': [
@@ -22,7 +21,6 @@ def general(request):
     return render(request,'national_general/general.html', context)
 
 def agegroup(request):
-    print DASH_ENTRIES
     request.session['active_entry'] = "national/agegroup"
     context = {
         'breadcrumbs': [
@@ -34,7 +32,6 @@ def agegroup(request):
 
 
 def natality(request):
-    print DASH_ENTRIES
     request.session['active_entry'] = "national/phenomena/natality"
     context = {
         'breadcrumbs': [
@@ -46,7 +43,6 @@ def natality(request):
 
 
 def fertility(request):
-    print DASH_ENTRIES
     request.session['active_entry'] = "national/phenomena/fertility"
     context = {
         'breadcrumbs': [
