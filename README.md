@@ -20,6 +20,6 @@ $  pip install -r requirements.txt
 ```
 
  ```sh
-$  pip manage.py runserver 
+$  python manage.py runserver 
 ```
 
