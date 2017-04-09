@@ -3,7 +3,7 @@
     <script>
         var popresponse;
         var popaj = $.ajax({
-            url: "http://localhost:3000/countypop",
+            url: "http://http://46.101.115.37:3000/countypop",
             type: 'GET',
             async: true,
             cache: true,
@@ -14,10 +14,10 @@
                 popresponse = msg
             }
         });
-        
+
         var natresponse;
         var nataj = $.ajax({
-            url: "http://localhost:3000/natalitycounty",
+            url: "http://http://46.101.115.37:3000/natalitycounty",
             type: 'GET',
             async: true,
             cache: true,
@@ -28,10 +28,10 @@
                 natresponse = msg
             }
         });
-        
+
         var natpercresponse;
         var natpercaj = $.ajax({
-            url: "http://localhost:3000/natalitycountyperc",
+            url: "http://http://46.101.115.37:3000/natalitycountyperc",
             type: 'GET',
             async: true,
             cache: true,
@@ -42,10 +42,10 @@
                 natpercresponse = msg
             }
         });
-        
+
         var fertpercresponse;
         var fertpercaj = $.ajax({
-            url: "http://localhost:3000/fertilitycountyperc",
+            url: "http://http://46.101.115.37:3000/fertilitycountyperc",
             type: 'GET',
             async: true,
             cache: true,
@@ -56,10 +56,10 @@
                 fertpercresponse = msg
             }
         });
-        
+
         var pregresponse;
         var pregaj = $.ajax({
-            url: "http://localhost:3000/pregnantcounty",
+            url: "http://http://46.101.115.37:3000/pregnantcounty",
             type: 'GET',
             async: true,
             cache: true,
@@ -70,10 +70,10 @@
                 pregresponse = msg
             }
         });
-        
+
         var abortresponse;
         var abortaj = $.ajax({
-            url: "http://localhost:3000/abortions",
+            url: "http://http://46.101.115.37:3000/abortions",
             type: 'GET',
             async: true,
             cache: true,
@@ -84,10 +84,10 @@
                 abortresponse = msg
             }
         });
-        
+
         var abortpercresponse;
         var abortpercaj = $.ajax({
-            url: "http://localhost:3000/abortionsperc",
+            url: "http://http://46.101.115.37:3000/abortionsperc",
             type: 'GET',
             async: true,
             cache: true,
@@ -98,10 +98,10 @@
                 abortpercresponse = msg
             }
         });
-        
+
         var expectresponse;
         var expectaj = $.ajax({
-            url: "http://localhost:3000/lifeexpectancy",
+            url: "http://http://46.101.115.37:3000/lifeexpectancy",
             type: 'GET',
             async: true,
             cache: true,
@@ -112,10 +112,10 @@
                 expectresponse = msg
             }
         });
-        
+
         var expectmaleresponse;
         var expectmaleaj = $.ajax({
-            url: "http://localhost:3000/lifeexpectancymale",
+            url: "http://http://46.101.115.37:3000/lifeexpectancymale",
             type: 'GET',
             async: true,
             cache: true,
@@ -126,10 +126,10 @@
                 expectmaleresponse = msg
             }
         });
-        
+
         var expectfemaleresponse;
         var expectfemaleaj = $.ajax({
-            url: "http://localhost:3000/lifeexpectancyfemale",
+            url: "http://http://46.101.115.37:3000/lifeexpectancyfemale",
             type: 'GET',
             async: true,
             cache: true,
@@ -152,7 +152,7 @@
                         <div class="row">
                             <div class="input-field col s6 m4 l4 offset-s3 offset-m4 offset-l4">
                                 <select id="year">
-                                
+
                                 </select>
                                 <label for="year">An</label>
                             </div>
@@ -161,35 +161,35 @@
                             function update(year){
                                 var result = $.grep(popresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
                                 $("#nrpop").html(result[0] ? result[0]["{{county}}"] : "-");
-                                
+
                                 var result = $.grep(natresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
                                 $("#natalit").html(result[0]? result[0]["{{county}}"] : "-");
-                                
+
                                 var result = $.grep(natpercresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
                                 $("#natalitperc").html(result[0]  ? result[0]["{{county}}"] + "‰" : "-");
-                                
+
                                 var result = $.grep(fertpercresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
                                 $("#fertperc").html(result[0] ? result[0]["{{county}}"] + "‰" : "-");
-                                
+
                                 var result = $.grep(pregresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
                                 $("#preg").html(result[0]  ? result[0]["{{county}}"] : "-");
-                                
+
                                 var result = $.grep(abortresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
                                 $("#aborts").html(result[0] ? result[0]["{{county}}"] : "-");
-                                
+
                                 var result = $.grep(abortpercresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
                                 $("#abortsperc").html(result[0]  ? result[0]["{{county}}"] + "‰" : "-");
-                                
+
                                 var result = $.grep(expectresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
                                 $("#expect").html(result[0] ? result[0]["{{county}}"] + " ani" : "-");
-                                
+
                                 var result = $.grep(expectmaleresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
                                 $("#expect-male").html(result[0]  ? result[0]["{{county}}"] + " ani" : "-");
-                                
+
                                 var result = $.grep(expectfemaleresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
                                 $("#expect-female").html(result[0] ? result[0]["{{county}}"] + " ani" : "-");
                             }
-                            
+
                             $.when(nataj, popaj, natpercaj, fertpercaj, pregaj, abortaj, abortpercaj, expectaj, expectmaleaj, expectfemaleaj).done(function(){
                                 $.each(natresponse, function(i, el){
                                     $("#year").append("<option>" + el["year"] + "</option>");
@@ -247,7 +247,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="card">
                     <div class="card-content">
@@ -258,27 +258,27 @@
                             <div id="natalitgraph"></div>
                         </center>
                         <script>
-    
+
                             $.when(nataj).done(function(){
                                 chart = anychart.area();
-    
+
                                 var totaldata = [];
-    
+
                                 $.each(natresponse, function(i, el){
                                     totaldata.push([el["year"], el["{{ county }}"]]);
                                 });
-    
+
                                 total = chart.area(totaldata);
                                 total.name("Nou nascutii");
                                 total.color("#1be2b1");
                                 total.zIndex(2.0001);
-    
+
                                 var legend = chart.legend();
                                 legend.enabled(true);
                                 chart.container("natalitgraph");
                                 chart.draw();
                             });
-    
+
                         </script>
                         <style>
                             #natalitgraph {
@@ -290,7 +290,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="card">
                     <div class="card-content">
@@ -301,27 +301,27 @@
                             <div id="fertpercgraph"></div>
                         </center>
                         <script>
-    
+
                             $.when(fertpercaj).done(function(){
                                 chart = anychart.area();
-    
+
                                 var totaldata = [];
-    
+
                                 $.each(fertpercresponse, function(i, el){
                                     totaldata.push([el["year"], el["{{ county }}"]]);
                                 });
-    
+
                                 total = chart.area(totaldata);
                                 total.name("Rata fertilitati");
                                 total.color("#dd4285");
                                 total.zIndex(2.0001);
-    
+
                                 var legend = chart.legend();
                                 legend.enabled(true);
                                 chart.container("fertpercgraph");
                                 chart.draw();
                             });
-    
+
                         </script>
                         <style>
                             #fertpercgraph {
@@ -343,27 +343,27 @@
                             <div id="abortgraph"></div>
                         </center>
                         <script>
-    
+
                             $.when(abortaj).done(function(){
                                 chart = anychart.area();
-    
+
                                 var totaldata = [];
-    
+
                                 $.each(abortresponse, function(i, el){
                                     totaldata.push([el["year"], el["{{ county }}"]]);
                                 });
-    
+
                                 total = chart.area(totaldata);
                                 total.name("Nr avorturi");
                                 total.color("#2d191d");
                                 total.zIndex(2.0001);
-    
+
                                 var legend = chart.legend();
                                 legend.enabled(true);
                                 chart.container("abortgraph");
                                 chart.draw();
                             });
-    
+
                         </script>
                         <style>
                             #abortgraph {
@@ -387,27 +387,27 @@
                             <div id="countygraph"></div>
                         </center>
                         <script>
-    
+
                             $.when(popaj).done(function(){
                                 chart = anychart.area();
-    
+
                                 var totaldata = [];
-    
+
                                 $.each(popresponse, function(i, el){
                                     totaldata.push([el["year"], el["{{ county }}"]]);
                                 });
-    
+
                                 total = chart.area(totaldata);
                                 total.name("Locuitori");
                                 total.color("#4286f4");
                                 total.zIndex(2.0001);
-    
+
                                 var legend = chart.legend();
                                 legend.enabled(true);
                                 chart.container("countygraph");
                                 chart.draw();
                             });
-    
+
                         </script>
                         <style>
                             #countygraph {
@@ -429,27 +429,27 @@
                             <div id="natalitpercgraph"></div>
                         </center>
                         <script>
-    
+
                             $.when(natpercaj).done(function(){
                                 chart = anychart.area();
-    
+
                                 var totaldata = [];
-    
+
                                 $.each(natpercresponse, function(i, el){
                                     totaldata.push([el["year"], el["{{ county }}"]]);
                                 });
-    
+
                                 total = chart.area(totaldata);
                                 total.name("Rata natalitati");
                                 total.color("#cbdd42");
                                 total.zIndex(2.0001);
-    
+
                                 var legend = chart.legend();
                                 legend.enabled(true);
                                 chart.container("natalitpercgraph");
                                 chart.draw();
                             });
-    
+
                         </script>
                         <style>
                             #natalitpercgraph {
@@ -471,27 +471,27 @@
                             <div id="preggraph"></div>
                         </center>
                         <script>
-    
+
                             $.when(pregaj).done(function(){
                                 chart = anychart.area();
-    
+
                                 var totaldata = [];
-    
+
                                 $.each(pregresponse, function(i, el){
                                     totaldata.push([el["year"], el["{{ county }}"]]);
                                 });
-    
+
                                 total = chart.area(totaldata);
                                 total.name("Nr gravide");
                                 total.color("#ce082f");
                                 total.zIndex(2.0001);
-    
+
                                 var legend = chart.legend();
                                 legend.enabled(true);
                                 chart.container("preggraph");
                                 chart.draw();
                             });
-    
+
                         </script>
                         <style>
                             #preggraph {
@@ -513,27 +513,27 @@
                             <div id="abortpercgraph"></div>
                         </center>
                         <script>
-    
+
                             $.when(abortpercaj).done(function(){
                                 chart = anychart.area();
-    
+
                                 var totaldata = [];
-    
+
                                 $.each(abortpercresponse, function(i, el){
                                     totaldata.push([el["year"], el["{{ county }}"]]);
                                 });
-    
+
                                 total = chart.area(totaldata);
                                 total.name("Rata avort");
                                 total.color("#050203");
                                 total.zIndex(2.0001);
-    
+
                                 var legend = chart.legend();
                                 legend.enabled(true);
                                 chart.container("abortpercgraph");
                                 chart.draw();
                             });
-    
+
                         </script>
                         <style>
                             #abortpercgraph {
@@ -559,14 +559,14 @@
                             <div id="expectgraph"></div>
                         </center>
                         <script>
-    
+
                             $.when(expectaj, expectmaleaj, expectfemaleaj).done(function(){
                                 chart = anychart.area();
-    
+
                                 var totaldata = [];
                                 var totalmaledata = [];
                                 var totalfemaledata = [];
-    
+
                                 $.each(expectresponse, function(i, el){
                                     totaldata.push([el["year"], el["{{ county }}"]]);
                                 });
@@ -576,30 +576,30 @@
                                 $.each(expectfemaleresponse, function(i, el){
                                     totalfemaledata.push([el["year"], el["{{ county }}"]]);
                                 });
-    
+
                                 total = chart.area(totaldata);
                                 total.name("Medie");
                                 total.color("#3abc6c");
                                 total.zIndex(2.0001);
-                                
-                                
+
+
                                 male = chart.area(totalmaledata);
                                 male.name("Barbati");
                                 male.color("#4583e0");
                                 male.zIndex(3.0001);
-                                
-                                
+
+
                                 female = chart.area(totalfemaledata);
                                 female.name("Femei");
                                 female.color("#d61b59");
                                 female.zIndex(1.0001);
-    
+
                                 var legend = chart.legend();
                                 legend.enabled(true);
                                 chart.container("expectgraph");
                                 chart.draw();
                             });
-    
+
                         </script>
                         <style>
                             #expectgraph {
