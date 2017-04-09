@@ -23,11 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'l4(+uu&2&&fymxdr3+30!)ls+%zz&3)@3z@npf8e2m#0xrip_^'
 
 #Recaptcha key
-RECAPTCHA_PUBLIC_KEY = '6LemJBwUAAAAAKoGDehr9PXhtm37yIFVh4-8IGgI'
-RECAPTCHA_PRIVATE_KEY = '6LemJBwUAAAAAIh69Wu4iYCivMZg6BoPn87Wiy8C'
+RECAPTCHA_PUBLIC_KEY = '6LcXOhwUAAAAAJC_nWG06wuJciNW7Zt2sxSagRGz'
+RECAPTCHA_PRIVATE_KEY = '6LcXOhwUAAAAAJto6pvoDQKnxbqyXdkyj2S55y6t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 from .local import EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_PORT
 
@@ -39,7 +39,8 @@ EMAIL_HOST_PASSWORD=EMAIL_HOST_PASSWORD#insert password
 EMAIL_PORT=EMAIL_PORT
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-ALLOWED_HOSTS = ["46.101.115.37"]
+ALLOWED_HOSTS = ["46.101.115.37","www.demografie.me","demografie.me",'127.0.0.1', 'localhost']
+
 
 
 # Application definition
