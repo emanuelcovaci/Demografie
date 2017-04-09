@@ -10,7 +10,7 @@ add_dash_entry("county", "Nivel Judetean", '',icon='tune')
 for cnty in counties:
     f_l = cnty[0]
     if not DASH_ENTRIES["county"]["children"].get(f_l, False):
-        add_dash_entry(f_l, f_l.title(), '', parent='county')
+        add_dash_entry(f_l, f_l.title(), '', parent='county', icon="subdirectory_arrow_right")
     add_dash_entry(cnty, cnty.title(), "county", parent='county/' + f_l, kwargs={"cnty" : cnty})
 
 print DASH_ENTRIES
