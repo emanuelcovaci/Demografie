@@ -25,7 +25,6 @@ def add_dash_entry(name, verbose_name, url, icon='label', parent="", kwargs={}):
 
 def recursive_entry(entries, depth, active_entries=[], parent_active=False):
     text = ""
-    print active_entries
     for entry in sorted( entries["children"].itervalues(), key=lambda k: k['verbose_name']):
         has_children = len(entry["children"]) > 0
         if entry_active(entry, active_entries) or (not has_children and parent_active and len(active_entries) is 0):

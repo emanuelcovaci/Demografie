@@ -13,7 +13,7 @@ for cnty in counties:
         add_dash_entry(f_l, f_l.title(), '', parent='county', icon="subdirectory_arrow_right")
     add_dash_entry(cnty, cnty.title(), "county", parent='county/' + f_l, kwargs={"cnty" : cnty})
 
-print DASH_ENTRIES
+
 
 def county(request, cnty):
     request.session['active_entry'] = "county/" + cnty[0] + "/" + cnty

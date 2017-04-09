@@ -75,7 +75,6 @@ def fertility(request):
     return render(request,'national/fertility.html', context)
 
 def aborts(request):
-    print DASH_ENTRIES
     request.session['active_entry'] = "national/phenomena/aborts"
     context = {
         'breadcrumbs': [
@@ -87,7 +86,6 @@ def aborts(request):
     return render(request,'national/aborts.html', context)
 
 def mortality(request):
-    print DASH_ENTRIES
     request.session['active_entry'] = "national/phenomena/deaths/mortality"
     context = {
         'breadcrumbs': [
@@ -100,7 +98,6 @@ def mortality(request):
     return render(request,'national/mortality.html', context)
 
 def abortdeaths(request):
-    print DASH_ENTRIES
     request.session['active_entry'] = "national/phenomena/deaths/abortdeaths"
     context = {
         'breadcrumbs': [
@@ -113,7 +110,6 @@ def abortdeaths(request):
     return render(request,'national/abortdeaths.html', context)
 
 def infantdeaths(request):
-    print DASH_ENTRIES
     request.session['active_entry'] = "national/phenomena/deaths/infantdeaths"
     context = {
         'breadcrumbs': [
@@ -126,7 +122,6 @@ def infantdeaths(request):
     return render(request,'national/infantdeaths.html', context)
 
 def borndead(request):
-    print DASH_ENTRIES
     request.session['active_entry'] = "national/phenomena/deaths/borndead"
     context = {
         'breadcrumbs': [
@@ -139,7 +134,6 @@ def borndead(request):
     return render(request,'national/borndead.html', context)
 
 def naturalincrease(request):
-    print DASH_ENTRIES
     request.session['active_entry'] = "national/phenomena/naturalincrease"
     context = {
         'breadcrumbs': [
@@ -152,7 +146,6 @@ def naturalincrease(request):
 
 
 def marriage(request):
-    print DASH_ENTRIES
     request.session['active_entry'] = "national/phenomena/marriage"
     context = {
         'breadcrumbs': [
