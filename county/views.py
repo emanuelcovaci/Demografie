@@ -5,7 +5,7 @@ from pythonic.utility import generate_list, DASH_ENTRIES, add_dash_entry
 # Create your views here.
 
 counties = ["alba", "arad", "arges", "bacau", "bihor", "bistria-nasaud", "botosani", "brasov", "braila", "buzau", "caras-severin", "calarasi", "cluj", "constanta", "covasna", "dambovita", "dolj", "galati", "giurgiu", "gorj", "harghita", "hunedoara", "ialomita", "iasi", "ilfov", "maramures", "mehedinti", "mures", "neamt", "olt", "prahova", "satu-mare", "salaj", "sibiu", "suceava", "teleorman", "timis", "tulcea", "vaslui", "valcea", "vrancea", "bucuresti"]
-add_dash_entry("county", "Nivel Judetean", '')
+add_dash_entry("county", "Nivel Judetean", '',icon='tune')
 
 for cnty in counties:
     f_l = cnty[0]
