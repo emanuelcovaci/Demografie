@@ -23,3 +23,20 @@ $  pip install -r requirements.txt
 $  python manage.py runserver 
 ```
 
+## Tehnologi folosite
+* Html
+* Css
+* JavaScript
+* Jquery
+* Python
+* Django
+* Materialize
+* Sass
+* Json-server
+
+## Pachete folosite de la Django
+* libsass
+* django-compressor
+* django-sass-processor
+* django-widget-tweaks==1.4.1
+* django-recaptcha==1.0.5
