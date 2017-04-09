@@ -52,7 +52,7 @@
                         <div class="row">
                             <div class="input-field col s6 m4 l4 offset-s3 offset-m4 offset-l4">
                                 <select id="year">
-                                
+
                                 </select>
                                 <label for="year">An</label>
                             </div>
@@ -61,56 +61,56 @@
                             function update(year){
                                 var popresult = $.grep(popresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
                                 $("#nrpop").html(popresult[0] ? popresult[0]["totalpop"] : "-");
-                                
+
                                 $("#ruralpop").html(popresult[0] ? popresult[0]["ruralpop"] : "-");
-                                
+
                                 $("#urbanpop").html(popresult[0] ? popresult[0]["urbanpop"] : "-");
-                                
+
                                 $("#female").html(popresult[0] ? popresult[0]["femalepop"] : "-");
-                                
+
                                 $("#male").html(popresult[0] ? popresult[0]["malepop"] : "-");
-                                
+
                                 var miscresult = $.grep(miscresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
                                 $("#natalit").html(miscresult[0] ? miscresult[0]["bornalive"] : "-");
-                                
+
                                 $("#natalitperc").html(miscresult[0] ? miscresult[0]["bornaliveperc"]  + "‰" : "-");
-                                
+
                                 $("#fertilit").html(miscresult[0] ? miscresult[0]["fertilityperc"]  + "‰" : "-");
-                                
+
                                 $("#preg").html(miscresult[0] ? miscresult[0]["pregnant"] : "-");
-                                
+
                                 $("#abort").html(miscresult[0] ? miscresult[0]["abortions"] : "-");
-                                
+
                                 $("#abortdeaths").html(miscresult[0] ? miscresult[0]["abortiondeaths"] : "-");
-                                
+
                                 $("#death").html(miscresult[0] ? miscresult[0]["deceased"] : "-");
-                                
+
                                 $("#deathperc").html(miscresult[0] ? miscresult[0]["deceasedperc"] + "‰" : "-");
-                                
+
                                 $("#infantdeath").html(miscresult[0] ? miscresult[0]["under1yeardead"] : "-");
-                                
+
                                 $("#borndead").html(miscresult[0] ? miscresult[0]["borndead"] : "-");
-                                
+
                                 $("#natincrease").html(miscresult[0] ? miscresult[0]["naturalincrease"] : "-");
-                                
+
                                 $("#natincreaseperc").html(miscresult[0] ? miscresult[0]["naturalincreaseperc"] + "‰" : "-");
-                                
+
                                 $("#marriage").html(miscresult[0] ? miscresult[0]["marriages"] : "-");
-                                
+
                                 $("#divorce").html(miscresult[0] ? miscresult[0]["divorces"] : "-");
-                                
+
                                 urbanview.set(0, 'value', popresult[0]["urbanperc"]);
                                 urbanview.set(1, 'value', popresult[0]["ruralperc"]);
-                                
-                                
+
+
                                 var ageresult = $.grep(ageresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
-                                
+
                                 $.each(ageresult[0], function(k, el){
-                                    
+
                                 });
-                                
+
                             }
-                            
+
                             $.when(popaj, miscaj, ageaj).done(function(){
                                 $.each(popresponse, function(i, el){
                                     $("#year").append("<option>" + el["year"] + "</option>");
@@ -220,13 +220,13 @@
                             var urbanview = urbanset.mapAs();
                             $.when(popaj).done(function(){
                                 var chart = anychart.pie(urbanset);
-    
+
                                 var legend = chart.legend();
                                 legend.enabled(true);
                                 chart.container("urbanpie");
                                 chart.draw();
                             });
-    
+
                         </script>
                         <style>
                             #urbanpie {
@@ -234,13 +234,20 @@
                                 margin: 0;
                                 padding: 0;
                             }
+                            @media only screen and (max-width: 599px){
+                                #urbanpie {
+                                    height: 250px !important;
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                              }
                         </style>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col s12 m12 l12">
             <div class="row">
                 <div class="card">
@@ -257,13 +264,13 @@
                             $.when(natpercaj).done(function(){
                                 var chart = anychart.column();
                                 chart.column(ageset);
-    
+
                                 var legend = chart.legend();
                                 legend.enabled(true);
                                 chart.container("agechart");
                                 chart.draw();
                             });
-    
+
                         </script>
                         <style>
                             #agechart {
@@ -281,31 +288,96 @@
                         <div class="card-title center-align">
                             Evolutia numarului de gravide inregistrate in fiecare an in judetul {{ county | title }} in timp
                         </div>
+                        <center>    <!-- <div class="row">
+        <div class="col s12 m12 l12">
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Evolutia duratei medie de viata in judetul {{ county | title }} in timp
+                        </div>
                         <center>
+                            <div id="expectgraph"></div>
+                        </center>
+                        <script>
+
+                            $.when(expectaj, expectmaleaj, expectfemaleaj).done(function(){
+                                chart = anychart.area();
+
+                                var totaldata = [];
+                                var totalmaledata = [];
+                                var totalfemaledata = [];
+
+                                $.each(expectresponse, function(i, el){
+                                    totaldata.push([el["year"], el["{{ county }}"]]);
+                                });
+                                $.each(expectmaleresponse, function(i, el){
+                                    totalmaledata.push([el["year"], el["{{ county }}"]]);
+                                });
+                                $.each(expectfemaleresponse, function(i, el){
+                                    totalfemaledata.push([el["year"], el["{{ county }}"]]);
+                                });
+
+                                total = chart.area(totaldata);
+                                total.name("Medie");
+                                total.color("#3abc6c");
+                                total.zIndex(2.0001);
+
+
+                                male = chart.area(totalmaledata);
+                                male.name("Barbati");
+                                male.color("#4583e0");
+                                male.zIndex(3.0001);
+
+
+                                female = chart.area(totalfemaledata);
+                                female.name("Femei");
+                                female.color("#d61b59");
+                                female.zIndex(1.0001);
+
+                                var legend = chart.legend();
+                                legend.enabled(true);
+                                chart.container("expectgraph");
+                                chart.draw();
+                            });
+
+                        </script>
+                        <style>
+                            #expectgraph {
+                                height: 400px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
                             <div id="preggraph"></div>
                         </center>
                         <script>
-    
+
                             $.when(pregaj).done(function(){
                                 chart = anychart.area();
-    
+
                                 var totaldata = [];
-    
+
                                 $.each(pregresponse, function(i, el){
                                     totaldata.push([el["year"], el["{{ county }}"]]);
                                 });
-    
+
                                 total = chart.area(totaldata);
                                 total.name("Nr gravide");
                                 total.color("#ce082f");
                                 total.zIndex(2.0001);
-    
+
                                 var legend = chart.legend();
                                 legend.enabled(true);
                                 chart.container("preggraph");
                                 chart.draw();
                             });
-    
+
                         </script>
                         <style>
                             #preggraph {
@@ -327,27 +399,27 @@
                             <div id="abortpercgraph"></div>
                         </center>
                         <script>
-    
+
                             $.when(abortpercaj).done(function(){
                                 chart = anychart.area();
-    
+
                                 var totaldata = [];
-    
+
                                 $.each(abortpercresponse, function(i, el){
                                     totaldata.push([el["year"], el["{{ county }}"]]);
                                 });
-    
+
                                 total = chart.area(totaldata);
                                 total.name("Rata avort");
                                 total.color("#050203");
                                 total.zIndex(2.0001);
-    
+
                                 var legend = chart.legend();
                                 legend.enabled(true);
                                 chart.container("abortpercgraph");
                                 chart.draw();
                             });
-    
+
                         </script>
                         <style>
                             #abortpercgraph {
@@ -358,10 +430,7 @@
                         </style>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
+            </div>    <!-- <div class="row">
         <div class="col s12 m12 l12">
             <div class="row">
                 <div class="card">
@@ -373,14 +442,14 @@
                             <div id="expectgraph"></div>
                         </center>
                         <script>
-    
+
                             $.when(expectaj, expectmaleaj, expectfemaleaj).done(function(){
                                 chart = anychart.area();
-    
+
                                 var totaldata = [];
                                 var totalmaledata = [];
                                 var totalfemaledata = [];
-    
+
                                 $.each(expectresponse, function(i, el){
                                     totaldata.push([el["year"], el["{{ county }}"]]);
                                 });
@@ -390,30 +459,30 @@
                                 $.each(expectfemaleresponse, function(i, el){
                                     totalfemaledata.push([el["year"], el["{{ county }}"]]);
                                 });
-    
+
                                 total = chart.area(totaldata);
                                 total.name("Medie");
                                 total.color("#3abc6c");
                                 total.zIndex(2.0001);
-                                
-                                
+
+
                                 male = chart.area(totalmaledata);
                                 male.name("Barbati");
                                 male.color("#4583e0");
                                 male.zIndex(3.0001);
-                                
-                                
+
+
                                 female = chart.area(totalfemaledata);
                                 female.name("Femei");
                                 female.color("#d61b59");
                                 female.zIndex(1.0001);
-    
+
                                 var legend = chart.legend();
                                 legend.enabled(true);
                                 chart.container("expectgraph");
                                 chart.draw();
                             });
-    
+
                         </script>
                         <style>
                             #expectgraph {
@@ -426,5 +495,73 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+        </div>
+    </div> -->
+    <!-- <div class="row">
+        <div class="col s12 m12 l12">
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Evolutia duratei medie de viata in judetul {{ county | title }} in timp
+                        </div>
+                        <center>
+                            <div id="expectgraph"></div>
+                        </center>
+                        <script>
+
+                            $.when(expectaj, expectmaleaj, expectfemaleaj).done(function(){
+                                chart = anychart.area();
+
+                                var totaldata = [];
+                                var totalmaledata = [];
+                                var totalfemaledata = [];
+
+                                $.each(expectresponse, function(i, el){
+                                    totaldata.push([el["year"], el["{{ county }}"]]);
+                                });
+                                $.each(expectmaleresponse, function(i, el){
+                                    totalmaledata.push([el["year"], el["{{ county }}"]]);
+                                });
+                                $.each(expectfemaleresponse, function(i, el){
+                                    totalfemaledata.push([el["year"], el["{{ county }}"]]);
+                                });
+
+                                total = chart.area(totaldata);
+                                total.name("Medie");
+                                total.color("#3abc6c");
+                                total.zIndex(2.0001);
+
+
+                                male = chart.area(totalmaledata);
+                                male.name("Barbati");
+                                male.color("#4583e0");
+                                male.zIndex(3.0001);
+
+
+                                female = chart.area(totalfemaledata);
+                                female.name("Femei");
+                                female.color("#d61b59");
+                                female.zIndex(1.0001);
+
+                                var legend = chart.legend();
+                                legend.enabled(true);
+                                chart.container("expectgraph");
+                                chart.draw();
+                            });
+
+                        </script>
+                        <style>
+                            #expectgraph {
+                                height: 400px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
 {% endblock %}
