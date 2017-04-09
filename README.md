@@ -32,7 +32,7 @@ $  python manage.py runserver
 * Django
 * Materialize
 * Sass
-* NodeIJ
+* Json-server
 
 ## Pachete folosite de la Django
 * libsass
