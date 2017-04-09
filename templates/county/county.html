@@ -196,6 +196,7 @@
                                 });
                                 $("#year").children().last().attr("selected", "selected");
                                 $("#year").material_select();
+                                update($("#year").find(":selected").text());
                                 $("#year").on("change", function(){
                                     update($(this).find(":selected").text());
                                 });

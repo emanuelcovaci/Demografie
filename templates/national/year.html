@@ -1,0 +1,430 @@
+{% extends "common/base.html" %}
+{% block content %}
+    <script>
+        var popresponse;
+        var popaj = $.ajax({
+            url: "http://localhost:3000/population",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){
+                popresponse = msg
+            }
+        });
+        var ageresponse;
+        var ageaj = $.ajax({
+            url: "http://localhost:3000/agegroupperc",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){
+                ageresponse = msg
+            }
+        });
+        var miscresponse;
+        var miscaj = $.ajax({
+            url: "http://localhost:3000/misc",
+            type: 'GET',
+            async: true,
+            cache: true,
+            timeout: 30000,
+            error: function(){
+            },
+            success: function(msg){
+                miscresponse = msg
+            }
+        });
+    </script>
+    <div class="row">
+        <div class="col s12 m6 l6">
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Statistici nationale
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6 m4 l4 offset-s3 offset-m4 offset-l4">
+                                <select id="year">
+                                
+                                </select>
+                                <label for="year">An</label>
+                            </div>
+                        </div>
+                        <script>
+                            function update(year){
+                                var popresult = $.grep(popresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
+                                $("#nrpop").html(popresult[0] ? popresult[0]["totalpop"] : "-");
+                                
+                                $("#ruralpop").html(popresult[0] ? popresult[0]["ruralpop"] : "-");
+                                
+                                $("#urbanpop").html(popresult[0] ? popresult[0]["urbanpop"] : "-");
+                                
+                                $("#female").html(popresult[0] ? popresult[0]["femalepop"] : "-");
+                                
+                                $("#male").html(popresult[0] ? popresult[0]["malepop"] : "-");
+                                
+                                var miscresult = $.grep(miscresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
+                                $("#natalit").html(miscresult[0] ? miscresult[0]["bornalive"] : "-");
+                                
+                                $("#natalitperc").html(miscresult[0] ? miscresult[0]["bornaliveperc"]  + "‰" : "-");
+                                
+                                $("#fertilit").html(miscresult[0] ? miscresult[0]["fertilityperc"]  + "‰" : "-");
+                                
+                                $("#preg").html(miscresult[0] ? miscresult[0]["pregnant"] : "-");
+                                
+                                $("#abort").html(miscresult[0] ? miscresult[0]["abortions"] : "-");
+                                
+                                $("#abortdeaths").html(miscresult[0] ? miscresult[0]["abortiondeaths"] : "-");
+                                
+                                $("#death").html(miscresult[0] ? miscresult[0]["deceased"] : "-");
+                                
+                                $("#deathperc").html(miscresult[0] ? miscresult[0]["deceasedperc"] + "‰" : "-");
+                                
+                                $("#infantdeath").html(miscresult[0] ? miscresult[0]["under1yeardead"] : "-");
+                                
+                                $("#borndead").html(miscresult[0] ? miscresult[0]["borndead"] : "-");
+                                
+                                $("#natincrease").html(miscresult[0] ? miscresult[0]["naturalincrease"] : "-");
+                                
+                                $("#natincreaseperc").html(miscresult[0] ? miscresult[0]["naturalincreaseperc"] + "‰" : "-");
+                                
+                                $("#marriage").html(miscresult[0] ? miscresult[0]["marriages"] : "-");
+                                
+                                $("#divorce").html(miscresult[0] ? miscresult[0]["divorces"] : "-");
+                                
+                                urbanview.set(0, 'value', popresult[0]["urbanperc"]);
+                                urbanview.set(1, 'value', popresult[0]["ruralperc"]);
+                                
+                                
+                                var ageresult = $.grep(ageresponse, function(e){ console.log(e["year"]);return e["year"] == year; });
+                                
+                                $.each(ageresult[0], function(k, el){
+                                    
+                                });
+                                
+                            }
+                            
+                            $.when(popaj, miscaj, ageaj).done(function(){
+                                $.each(popresponse, function(i, el){
+                                    $("#year").append("<option>" + el["year"] + "</option>");
+                                });
+                                $("#year").children().last().attr("selected", "selected");
+                                $("#year").material_select();
+                                update($("#year").find(":selected").text());
+                                $("#year").on("change", function(){
+                                    update($(this).find(":selected").text());
+                                });
+                            });
+                        </script>
+                        <div class="row">
+                            <p>
+                                <b>Nr. locuitori:</b>
+                                <span style="float: right"id="nrpop">-</span>
+                            </p>
+                            <p>
+                                <b>Nr. locuitori rurali:</b>
+                                <span style="float: right" id="ruralpop">-</span>
+                            </p>
+                            <p>
+                                <b>Nr. locuitori urbani:</b>
+                                <span style="float: right" id="urbanpop">-</span>
+                            </p>
+                            <p>
+                                <b>Femei:</b>
+                                <span style="float: right" id="female">-</span>
+                            </p>
+                            <p>
+                                <b>Barbati:</b>
+                                <span style="float: right" id="male">-</span>
+                            </p>
+                            <p>
+                                <b>Nascuti vii:</b>
+                                <span style="float: right" id="natalit">-</span>
+                            </p>
+                            <p>
+                                <b>Natalitate:</b>
+                                <span style="float: right" id="natalitperc">-</span>
+                            </p>
+                            <p>
+                                <b>Fertilitate:</b>
+                                <span style="float: right" id="fertilit">-</span>
+                            </p>
+                            <p>
+                                <b>Nr gravide inregistrate:</b>
+                                <span style="float: right" id="preg">-</span>
+                            </p>
+                            <p>
+                                <b>Avorturi:</b>
+                                <span style="float: right" id="abort">-</span>
+                            </p>
+                            <p>
+                                <b>Decese prin avort:</b>
+                                <span style="float: right" id="abortdeaths">-</span>
+                            </p>
+                            <p>
+                                <b>Decese:</b>
+                                <span style="float: right" id="death">-</span>
+                            </p>
+                            <p>
+                                <b>Mortalitate:</b>
+                                <span style="float: right" id="deathperc">-</span>
+                            </p>
+                            <p>
+                                <b>Decese infanti:</b>
+                                <span style="float: right" id="infantdeath">-</span>
+                            </p>
+                            <p>
+                                <b>Nascuti morti:</b>
+                                <span style="float: right" id="borndead">-</span>
+                            </p>
+                            <p>
+                                <b>Spor natural:</b>
+                                <span style="float: right" id="natincrease">-</span>
+                            </p>
+                            <p>
+                                <b>Rata spor natural:</b>
+                                <span style="float: right" id="natincreaseperc">-</span>
+                            </p>
+                            <p>
+                                <b>Casatorii:</b>
+                                <span style="float: right" id="marriage">-</span>
+                            </p>
+                            <p>
+                                <b>Divorturi:</b>
+                                <span style="float: right" id="divorce">-</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l6">
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Raport rural/urban
+                        </div>
+                        <center>
+                            <div id="urbanpie"></div>
+                        </center>
+                        <script>
+                            var urbanset = anychart.data.set([["Urban", 50], ["Rural", 50]]);
+                            var urbanview = urbanset.mapAs();
+                            $.when(popaj).done(function(){
+                                var chart = anychart.pie(urbanset);
+    
+                                var legend = chart.legend();
+                                legend.enabled(true);
+                                chart.container("urbanpie");
+                                chart.draw();
+                            });
+    
+                        </script>
+                        <style>
+                            #urbanpie {
+                                height: 500px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m12 l12">
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Grupe de varsta
+                        </div>
+                        <center>
+                            <div id="agechart"></div>
+                        </center>
+                        <script>
+                            var ageset; = anychart.data.set([["Urban", 50], ["Rural", 50]]);
+                            var ageview; = ageset.mapAs();
+                            $.when(natpercaj).done(function(){
+                                var chart = anychart.column();
+                                chart.column(ageset);
+    
+                                var legend = chart.legend();
+                                legend.enabled(true);
+                                chart.container("agechart");
+                                chart.draw();
+                            });
+    
+                        </script>
+                        <style>
+                            #agechart {
+                                height: 470px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Evolutia numarului de gravide inregistrate in fiecare an in judetul {{ county | title }} in timp
+                        </div>
+                        <center>
+                            <div id="preggraph"></div>
+                        </center>
+                        <script>
+    
+                            $.when(pregaj).done(function(){
+                                chart = anychart.area();
+    
+                                var totaldata = [];
+    
+                                $.each(pregresponse, function(i, el){
+                                    totaldata.push([el["year"], el["{{ county }}"]]);
+                                });
+    
+                                total = chart.area(totaldata);
+                                total.name("Nr gravide");
+                                total.color("#ce082f");
+                                total.zIndex(2.0001);
+    
+                                var legend = chart.legend();
+                                legend.enabled(true);
+                                chart.container("preggraph");
+                                chart.draw();
+                            });
+    
+                        </script>
+                        <style>
+                            #preggraph {
+                                height: 400px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Evolutia ratei de avort in judetul {{ county | title }} in timp
+                        </div>
+                        <center>
+                            <div id="abortpercgraph"></div>
+                        </center>
+                        <script>
+    
+                            $.when(abortpercaj).done(function(){
+                                chart = anychart.area();
+    
+                                var totaldata = [];
+    
+                                $.each(abortpercresponse, function(i, el){
+                                    totaldata.push([el["year"], el["{{ county }}"]]);
+                                });
+    
+                                total = chart.area(totaldata);
+                                total.name("Rata avort");
+                                total.color("#050203");
+                                total.zIndex(2.0001);
+    
+                                var legend = chart.legend();
+                                legend.enabled(true);
+                                chart.container("abortpercgraph");
+                                chart.draw();
+                            });
+    
+                        </script>
+                        <style>
+                            #abortpercgraph {
+                                height: 400px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m12 l12">
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-title center-align">
+                            Evolutia duratei medie de viata in judetul {{ county | title }} in timp
+                        </div>
+                        <center>
+                            <div id="expectgraph"></div>
+                        </center>
+                        <script>
+    
+                            $.when(expectaj, expectmaleaj, expectfemaleaj).done(function(){
+                                chart = anychart.area();
+    
+                                var totaldata = [];
+                                var totalmaledata = [];
+                                var totalfemaledata = [];
+    
+                                $.each(expectresponse, function(i, el){
+                                    totaldata.push([el["year"], el["{{ county }}"]]);
+                                });
+                                $.each(expectmaleresponse, function(i, el){
+                                    totalmaledata.push([el["year"], el["{{ county }}"]]);
+                                });
+                                $.each(expectfemaleresponse, function(i, el){
+                                    totalfemaledata.push([el["year"], el["{{ county }}"]]);
+                                });
+    
+                                total = chart.area(totaldata);
+                                total.name("Medie");
+                                total.color("#3abc6c");
+                                total.zIndex(2.0001);
+                                
+                                
+                                male = chart.area(totalmaledata);
+                                male.name("Barbati");
+                                male.color("#4583e0");
+                                male.zIndex(3.0001);
+                                
+                                
+                                female = chart.area(totalfemaledata);
+                                female.name("Femei");
+                                female.color("#d61b59");
+                                female.zIndex(1.0001);
+    
+                                var legend = chart.legend();
+                                legend.enabled(true);
+                                chart.container("expectgraph");
+                                chart.draw();
+                            });
+    
+                        </script>
+                        <style>
+                            #expectgraph {
+                                height: 400px;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

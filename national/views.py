@@ -4,19 +4,20 @@ from django.urls.base import reverse_lazy
 # Create your views here.
 
 add_dash_entry("national", "Nivel National", '',icon='tune')
-add_dash_entry("general", "Informatii Generale", 'general', parent='national',icon="subdirectory_arrow_right")
-add_dash_entry("agegroup", "Varsta Poulatiei", 'agegroup', parent='national',icon="subdirectory_arrow_right")
+add_dash_entry("general", "Informatii Generale", 'general', parent='national',icon="content_paste")
+add_dash_entry("year", "Pe ani", 'year', parent='national',icon="event_note")
+add_dash_entry("agegroup", "Varsta Poulatiei", 'agegroup', parent='national',icon="group")
 add_dash_entry("phenomena", "Fenomene Demografice", '', parent='national',icon="subdirectory_arrow_right")
-add_dash_entry("natality", "Natalitate", 'natality', parent='national/phenomena',icon='share')
-add_dash_entry("fertility", "Fertilitate", 'fertility', parent='national/phenomena',icon='share')
-add_dash_entry("aborts", "Avorturi", 'aborts', parent='national/phenomena',icon="share")
-add_dash_entry("deaths", "Decese", '', parent='national/phenomena',icon='share')
-add_dash_entry("mortality", "Mortalitatea", 'mortality', parent='national/phenomena/deaths',icon="description")
-add_dash_entry("abortdeaths", "Decese prin avort", 'abortdeaths', parent='national/phenomena/deaths',icon="description")
-add_dash_entry("infantdeaths", "Decese infantile", 'infantdeaths', parent='national/phenomena/deaths',icon="description")
-add_dash_entry("borndead", "Nascuti morti", 'borndead', parent='national/phenomena/deaths',icon="description")
-add_dash_entry("naturalincrease", "Sporul natural", 'naturalincrease', parent='national/phenomena',icon='share')
-add_dash_entry("marriage", "Casatorii/Divorturi", 'marriage', parent='national/phenomena',icon='share')
+add_dash_entry("natality", "Natalitate", 'natality', parent='national/phenomena',icon='face')
+add_dash_entry("fertility", "Fertilitate", 'fertility', parent='national/phenomena',icon='pregnant_woman')
+add_dash_entry("aborts", "Avorturi", 'aborts', parent='national/phenomena',icon="clear")
+add_dash_entry("deaths", "Decese", '', parent='national/phenomena',icon='block')
+add_dash_entry("mortality", "Mortalitatea", 'mortality', parent='national/phenomena/deaths',icon="label")
+add_dash_entry("abortdeaths", "Decese prin avort", 'abortdeaths', parent='national/phenomena/deaths',icon="label")
+add_dash_entry("infantdeaths", "Decese infantile", 'infantdeaths', parent='national/phenomena/deaths',icon="label")
+add_dash_entry("borndead", "Nascuti morti", 'borndead', parent='national/phenomena/deaths',icon="label")
+add_dash_entry("naturalincrease", "Sporul natural", 'naturalincrease', parent='national/phenomena',icon='timeline')
+add_dash_entry("marriage", "Casatorii/Divorturi", 'marriage', parent='national/phenomena',icon='favorite')
 
 def general(request):
     request.session['active_entry'] = "national/general"
@@ -37,6 +38,17 @@ def agegroup(request):
         'list': generate_list(request),
     }
     return render(request,'national/agegroup.html', context)
+
+
+def year(request):
+    request.session['active_entry'] = "national/year"
+    context = {
+        'breadcrumbs': [
+                {"name": "Pe ani", "url": reverse_lazy('year')},        
+            ],
+        'list': generate_list(request),
+    }
+    return render(request,'national/year.html', context)
 
 
 def natality(request):
