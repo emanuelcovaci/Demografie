@@ -4,6 +4,9 @@
 
 ####  Acest proiect are ca scop procesarea statisticilor puse la dispozitie de Guvernul Romaniei cu privire la demografie si prezentarea acestoara intr-un mod placut si interactiv
 
+### Donatii
+* Acest proiect are nevoie de ajutorul comunitatii pentru a putea fi online 24h din 24h astfel incat informatiile sa ajunga cu usurinta la oricine
+* Paypal: https://www.paypal.me/emanuelcovaci
 ## Deploy
 * Pentru a rula proiectul trebuie sa urmariti acesti pasi:
 
