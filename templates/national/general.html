@@ -1,9 +1,10 @@
 {% extends "common/base.html" %}
 {% block content %}
     <script>
+
         var response;
         var aj = $.ajax({
-            url: "http://localhost:3000/population",
+            url: "http://" + hostname + ":3000/population",
             type: 'GET',
             async: true,
             cache: true,

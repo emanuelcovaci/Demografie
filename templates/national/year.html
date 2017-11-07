@@ -3,7 +3,7 @@
     <script>
         var popresponse;
         var popaj = $.ajax({
-            url: "http://localhost:3000/population",
+            url: "http://" + hostname + ":3000/population",
             type: 'GET',
             async: true,
             cache: true,
@@ -16,7 +16,7 @@
         });
         var ageresponse;
         var ageaj = $.ajax({
-            url: "http://localhost:3000/agegroupperc",
+            url: "http://" + hostname + ":3000/agegroupperc",
             type: 'GET',
             async: true,
             cache: true,
@@ -29,7 +29,7 @@
         });
         var miscresponse;
         var miscaj = $.ajax({
-            url: "http://localhost:3000/misc",
+            url: "http://" + hostname + ":3000/misc",
             type: 'GET',
             async: true,
             cache: true,

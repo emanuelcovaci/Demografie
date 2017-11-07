@@ -39,7 +39,7 @@ EMAIL_HOST_PASSWORD=EMAIL_HOST_PASSWORD#insert password
 EMAIL_PORT=EMAIL_PORT
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -81,6 +81,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, ''),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

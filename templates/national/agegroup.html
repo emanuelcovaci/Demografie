@@ -1,9 +1,10 @@
 {% extends "common/base.html" %}
 {% block content %}
     <script>
+
         var response1;
         var aj1 = $.ajax({
-            url: "http://localhost:3000/agegrouppop",
+            url: "http://" + hostname + ":3000/agegrouppop",
             type: 'GET',
             async: true,
             cache: true,
@@ -16,7 +17,7 @@
         });
         var response2;
         var aj2 = $.ajax({
-            url: "http://localhost:3000/agegroupperc",
+            url: "http://" + hostname + ":3000/agegroupperc",
             type: 'GET',
             async: true,
             cache: true,

@@ -1,0 +1,13 @@
+{
+  "name": "Demografia Romaniei",
+  "short_name": "Demografia",
+  "start_url": "/",
+  "background_color": "#fff",
+  "display": "standalone",
+  "description": "A web app to show the demographics of Romania.",
+  "icons": [{
+    "src": "static/img/favicon.icon",
+    "sizes": "144x144",
+    "type": "image/png"
+  }]
+}

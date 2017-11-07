@@ -13,20 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
-from django.contrib import admin
 from django.conf import settings
+from django.conf.urls import include, url
 from django.conf.urls.static import static
+
+import views
 
 urlpatterns = [
     url(r'^', include('national.urls')),
     url(r'^', include('homepages.urls')),
     url(r'^', include('county.urls')),
     url(r'^', include('contact.urls')),
+    url(r'^sw(.*.js)$', views.sw, name='sw'),
+    url(r'^manifest(.*.json)$', views.manifest, name='manifest'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+
+print url
 

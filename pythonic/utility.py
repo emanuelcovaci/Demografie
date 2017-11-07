@@ -10,6 +10,7 @@ DASH_ENTRIES = {}
 
 def add_dash_entry(name, verbose_name, url, icon='label', parent="", kwargs={}):
     relation = parent.split("/")
+    par_url = parent
     parent = DASH_ENTRIES
     if relation[0] is not "":
         for rel in relation:
@@ -22,6 +23,17 @@ def add_dash_entry(name, verbose_name, url, icon='label', parent="", kwargs={}):
         "children" : {},
         "kwargs": kwargs,
     }
+
+def get_dash_urls(what=DASH_ENTRIES):
+    urls = []
+    for p in what.values():
+        if p["url_name"] == "": pass
+        elif p["kwargs"] != {}:
+            urls += [str(reverse(p["url_name"], kwargs=p["kwargs"]))]
+        else:
+            urls += [str(reverse(p["url_name"]))]
+        urls += get_dash_urls(p["children"])
+    return urls
 
 def recursive_entry(entries, depth, active_entries=[], parent_active=False):
     text = ""
