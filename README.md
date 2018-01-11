@@ -26,7 +26,7 @@ $  pip install -r requirements.txt
 $  python manage.py runserver 
 ```
 
-## Tehnologi folosite
+## Tehnologii folosite
 * Html
 * Css
 * JavaScript
